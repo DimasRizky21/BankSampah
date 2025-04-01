@@ -1,0 +1,17 @@
+.explore-btn {
+    background-color: #FF6969;
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 12px;
+}
+
+.image-section img {
+    width: 450px;
+}
+
+p {
+    margin-top: px;
+}
