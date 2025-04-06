@@ -1,17 +1,83 @@
-.explore-btn {
-    background-color: #FF6969;
-    color: black;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', sans-serif;
+  }
+
+  body {
+    background: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+
+  .container {
+    background: white;
+    max-width: 900px;
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .wood-image {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 200px;
+    height: 100%;
+  }
+
+  .cover {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+  }
+
+  .cover h1 {
+    font-size: 48px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+
+  .sofa-image {
+    background: #d9d9d9;
+    border-radius: 50% / 30%;
+    padding: 30px;
+    display: inline-block;
+  }
+
+  .hero-image img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 12px;
+  }
+
+  .explore-button {
+    margin-top: 20px;
+    background: #ff6b6b;
+    color: white;
     border: none;
     padding: 10px 20px;
-    font-size: 1rem;
+    border-radius: 20px;
+    font-size: 16px;
+    font-weight: bold;
     cursor: pointer;
-    border-radius: 12px;
-}
+  }
 
-.image-section img {
-    width: 450px;
-}
-
-p {
-    margin-top: px;
-}
+  .description {
+    margin-top: 30px;
+    font-size: 16px;
+    color: #333;
+    z-index: 1;
+    position: relative;
+    text-align: center;
+    max-width: 700px;
+  }
