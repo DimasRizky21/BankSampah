@@ -199,3 +199,60 @@
     text-align: center;
     max-width: 700px;
   }
+
+  /* Products on Sale */
+.product-sale {
+  padding: 60px;
+  background-color: #fff;
+}
+
+.product-sale h2 {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 40px;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.product-box {
+  height: 180px;
+  background-color: #eeeeee;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Tentang Kami */
+.about-us {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+  padding: 60px;
+  background-color: #f9f9f9;
+  flex-wrap: wrap;
+}
+
+.about-image img {
+  width: 300px;
+  height: auto;
+  border-radius: 12px;
+}
+
+.about-text {
+  flex: 1;
+  min-width: 300px;
+}
+
+.about-text h2 {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.about-text p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #444;
+}
