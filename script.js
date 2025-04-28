@@ -10,6 +10,25 @@ if (
   window.location.href = "index.html";
 }
 
+document.addEventListener("DOMContentLoaded", function () {
+  const openFormBtn = document.getElementById("openFormBtn");
+  const feedbackForm = document.getElementById("feedbackForm");
+
+  openFormBtn.addEventListener("click", function () {
+    if (feedbackForm.style.display === "none") {
+      feedbackForm.style.display = "block";
+    } else {
+      feedbackForm.style.display = "none";
+    }
+  });
+
+  feedbackForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+    alert("Terima kasih atas masukan Anda!");
+    feedbackForm.reset();
+    feedbackForm.style.display = "none";
+  });
+});
 
 
 

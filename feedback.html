@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Kritik dan Saran - LuxeFurnish</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+    <body class="container">
+        <nav class="navbar">
+            <div class="brand">LuxeFurnish</div>
+            <ul class="nav-menu">
+                <li><a href="index.html#home">Home</a></li>
+                <li><a href="index.html#product">Product</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+            <div style="width: 200px"></div>
+        </nav>
+
+        <section class="feedback-form" style="padding: 50px; text-align: center;">
+            <h2>Beri Kritik dan Saran Anda</h2>
+            <form id="kritikForm" style="max-width: 500px; margin: 0 auto; text-align: left;">
+                <div>
+                    <label for="name">Nama:</label><br>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div style="margin-top: 10px;">
+                    <label for="email">Email (Opsional):</label><br>
+                    <input type="email" id="email" name="email">
+                </div>
+                <div style="margin-top: 10px;">
+                    <label for="message">Kritik / Saran:</label><br>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+                </div>
+                <div style="margin-top: 15px;">
+                    <button type="submit">Kirim</button>
+                </div>
+            </form>
+        </section>
+
+        <script>
+            document.getElementById("kritikForm").addEventListener("submit", function (e) {
+                e.preventDefault();
+                alert("Terima kasih atas kritik dan saran Anda!");
+                this.reset();
+            });
+        </script>
+    </body>
+
+</html>

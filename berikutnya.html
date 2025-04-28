@@ -13,7 +13,7 @@
     <nav class="navbar">
       <div class="brand">LuxeFurnish</div>
       <ul class="nav-menu">
-        <li><a href="#home">Home</a></li>
+        <li><a href="index.html">Home</a></li>
         <li><a href="#product">Product</a></li>
         <li><a href="#about">About</a></li>
         <li><a href="#contact">Contact</a></li>
@@ -118,6 +118,34 @@
         </p>
       </div>
     </section>
+
+    <!-- Kritik dan Saran Section -->
+    <section class="feedback" id="feedback">
+      <h2>Kritik dan Saran</h2>
+      <a href="feedback.html">
+        <button type="button" style="padding: 10px 20px; font-size: 16px;">Beri Masukan</button>
+      </a>
+    </section>
+    
+      <form id="feedbackForm" style="display: none; margin-top: 20px;">
+        <div>
+          <label for="name">Nama:</label><br />
+          <input type="text" id="name" name="name" required />
+        </div>
+        <div style="margin-top: 10px;">
+          <label for="email">Email (Opsional):</label><br />
+          <input type="email" id="email" name="email" />
+        </div>
+        <div style="margin-top: 10px;">
+          <label for="message">Kritik / Saran:</label><br />
+          <textarea id="message" name="message" rows="5" required></textarea>
+        </div>
+        <div style="margin-top: 15px;">
+          <button type="submit">Kirim</button>
+        </div>
+      </form>
+    </section>
+
   </body>
 
 </html>
