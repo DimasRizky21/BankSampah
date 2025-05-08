@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard Admin - Bank Sampah</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f9fafb;
+      padding: 40px 20px;
+    }
+    .container {
+      max-width: 700px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      color: #1f2937;
+      text-align: center;
+    }
+    .card {
+      background-color: #e0f2fe;
+      padding: 20px;
+      border-radius: 12px;
+      margin: 20px 0;
+      text-align: center;
+    }
+    .card h3 {
+      margin-bottom: 10px;
+      color: #0369a1;
+    }
+    .card p {
+      font-size: 24px;
+      font-weight: bold;
+      color: #0c4a6e;
+    }
+    button {
+      padding: 12px;
+      width: 100%;
+      margin-top: 12px;
+      border: none;
+      border-radius: 8px;
+      background-color: #0284c7;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0369a1;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Selamat Datang, Admin 👋</h2>
+
+    <div class="card">
+      <h3>Total Setoran</h3>
+      <p id="totalSetoran">0 Transaksi</p>
+    </div>
+
+    <div class="card">
+      <h3>Total Saldo Semua User</h3>
+      <p id="totalSaldo">Rp 0</p>
+    </div>
+
+    <button onclick="window.location.href='daftar_user.html'">📄 Daftar User & Saldo</button>
+    <button onclick="window.location.href='verifikasi_setoran.html'">✅ Verifikasi Setoran</button>
+    <button onclick="resetData()">♻️ Reset Data & Saldo</button>
+    <button onclick="logout()">🚪 Logout</button>
+  </div>
+
+  <script>
+    // Simulasi data dummy, nanti bisa dihubungkan ke backend atau localStorage
+    const dataUser = JSON.parse(localStorage.getItem("dataUser")) || [];
+
+    let totalSetoran = 0;
+    let totalSaldo = 0;
+
+    dataUser.forEach(user => {
+      totalSetoran += user.transaksi || 0;
+      totalSaldo += user.saldo || 0;
+    });
+
+    document.getElementById("totalSetoran").innerText = totalSetoran + " Transaksi";
+    document.getElementById("totalSaldo").innerText = "Rp " + totalSaldo.toLocaleString();
+
+    function logout() {
+      localStorage.removeItem("admin");
+      window.location.href = "admin_login.html";
+    }
+
+    function resetData() {
+      if (confirm("Yakin ingin mereset semua data dan saldo user?")) {
+        localStorage.removeItem("dataUser");
+        alert("Data berhasil direset.");
+        location.reload();
+      }
+    }
+  </script>
+</body>
+</html>
