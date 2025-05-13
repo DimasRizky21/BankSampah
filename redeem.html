@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Penarikan Saldo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #fefce8;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #f59e0b;
+      padding: 20px;
+      text-align: center;
+      color: white;
+    }
+
+    main {
+      max-width: 500px;
+      margin: 40px auto;
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .saldo-box {
+      background-color: #dbeafe;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+      color: #1e40af;
+    }
+
+    label {
+      font-weight: bold;
+      margin-top: 15px;
+      display: block;
+    }
+
+    input, button {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      margin-top: 10px;
+      font-size: 16px;
+    }
+
+    input:focus, button:focus {
+      border-color: #f59e0b;
+      outline: none;
+    }
+
+    button {
+      background-color: #f59e0b;
+      color: white;
+      font-weight: bold;
+      border: none;
+      margin-top: 20px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #d97706;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Penarikan Saldo</h1>
+  </header>
+
+  <main>
+    <div class="saldo-box">
+      Saldo Anda: <span id="saldo">Rp 0</span>
+    </div>
+
+    <label for="nominal">Masukkan Nominal Penarikan (Rp)</label>
+    <input type="number" id="nominal" placeholder="Contoh: 10000" min="1000" step="500"/>
+
+    <button onclick="ajukanPenarikan()">Ajukan Penarikan</button>
+  </main>
+
+  <script>
+    const user = localStorage.getItem("user");
+    if (!user) window.location.href = "index.html";
+
+    const saldo = parseInt(localStorage.getItem("saldo") || 0);
+    document.getElementById("saldo").innerText = "Rp " + saldo.toLocaleString();
+
+    function ajukanPenarikan() {
+      const nominal = parseInt(document.getElementById("nominal").value);
+      if (!nominal || nominal < 1000) {
+        alert("Nominal harus lebih dari Rp 1000");
+        return;
+      }
+      if (nominal > saldo) {
+        alert("Saldo tidak mencukupi");
+        return;
+      }
+
+      fetch("redeem_saldo.php", {
+        method: "POST",
+        headers: {"Content-Type": "application/x-www-form-urlencoded"},
+        body: `nim=${user}&nominal=${nominal}`
+      })
+      .then(res => res.text())
+      .then(alert)
+      .then(() => location.href = "dashboard.html");
+    }
+  </script>
+</body>
+</html>

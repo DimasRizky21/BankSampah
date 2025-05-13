@@ -15,7 +15,7 @@
             <input type="email" id="email" placeholder="Masukkan Email">
             <input type="password" id="password" placeholder="Masukkan Password">
             <button onclick="submitDaftar()">Daftar</button>
-            <p>Sudah punya akun? <a href="login.html">Login</a></p>
+            <p>Sudah punya akun? <a href="index.html">Login</a></p>
         </div>
 
         <script>
@@ -60,7 +60,7 @@
                 localStorage.setItem("users", JSON.stringify(users));
 
                 alert("Pendaftaran berhasil! Silakan login.");
-                window.location.href = "login.html";
+                window.location.href = "index.html";
             }
         </script>
     </body>

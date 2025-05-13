@@ -1,42 +1,50 @@
 <!DOCTYPE html>
 <html lang="id">
 
-  <head>
-    <meta charset="UTF-8">
-    <title>Dashboard - Bank Sampah</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
-    <link rel="stylesheet" href="style.css">
-  </head>
+    <head>
+        <meta charset="UTF-8">
+        <title>Login - Bank Sampah Kampus</title>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="style.css">
+    </head>
+    
+    <body>
+        <div class="form">
+            <h2>Bank Sampah</h2>
+            <input type="text" id="username" placeholder="Masukkan Username">
+            <input type="password" id="password" placeholder="Masukkan Password">
+            <button onclick="login()">Login</button>
+            <p>Belum punya akun? <a href="Pendaftaranakun.html">Daftar</a></p>
+        </div>
 
-  <body>
-    <div class="container">
-      <h2>Halo, <span id="username"></span> 👋</h2>
+        <script>
+  function login() {
+    const username = document.getElementById("username").value.trim();
+    const password = document.getElementById("password").value.trim();
 
-      <div class="card">
-        <h3>Saldo Tabungan Sampah</h3>
-        <p id="saldo">Rp 0</p>
-      </div>
-      <button onclick="logout()">🚪 Logout</button>
-    </div>
+    if (!username || !password) {
+      alert("Harap masukkan username dan password!");
+      return;
+    }
 
-    <script>
-      const currentUser = localStorage.getItem("currentUser");
-      const users = JSON.parse(localStorage.getItem("users")) || [];
-      const user = users.find(u => u.username === currentUser);
+    const users = JSON.parse(localStorage.getItem("users")) || [];
 
-      if (user) {
-        document.getElementById("username").innerText = user.username;
-        document.getElementById("saldo").innerText = `Rp ${user.saldo || 0}`;
-      } else {
-        alert("Akun tidak ditemukan!");
-        window.location.href = "login.html";
-      }
+    const user = users.find(u => u.username === username && u.password === password);
 
-      function logout() {
-        localStorage.removeItem("currentUser");
-        window.location.href = "login.html";
-      }
-    </script>
-  </body>
+    if (!user) {
+      alert("Username atau password salah!");
+      return;
+    }
+
+    // Simpan ke localStorage agar dashboard bisa membaca
+    localStorage.setItem("user", JSON.stringify(user));
+    localStorage.setItem("saldo", user.saldo || 0); // jika ada saldo
+
+    alert("Login berhasil!");
+    window.location.href = "dashboard.html";
+  }
+</script>
+
+    </body>
 
 </html>
