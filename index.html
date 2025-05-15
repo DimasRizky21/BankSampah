@@ -1,50 +1,69 @@
 <!DOCTYPE html>
 <html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Greenovate Unimus</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Navbar -->
+    <header>
+      <div class="navbar">
+        <div class="logo">EcoSort</div>
+        <nav>
+          <a href="#">Home</a>
+          <a href="#">Informasi</a>
+          <a href="#">Layanan</a>
+        </nav>
+        <a href="login.html" class="btn-masuk">MASUK</a>
+      </div>
+    </header>
 
-    <head>
-        <meta charset="UTF-8">
-        <title>Login - Bank Sampah Kampus</title>
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="style.css">
-    </head>
-    
-    <body>
-        <div class="form">
-            <h2>Bank Sampah</h2>
-            <input type="text" id="username" placeholder="Masukkan Username">
-            <input type="password" id="password" placeholder="Masukkan Password">
-            <button onclick="login()">Login</button>
-            <p>Belum punya akun? <a href="Pendaftaranakun.html">Daftar</a></p>
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-text">
+        <h1>Halo, Sahabat EcoSort!</h1>
+        <p>
+          Bersiaplah untuk menjadikan pengolahan sampah sebagai momen yang lebih
+          menyenangkan. Ayo mulai perjalanan hijau kita! Jangan lupa untuk
+          mengupload foto sampah dan biarkan AI kami mengenali jenisnya. Setiap
+          tindakan kecil bisa akan membuat perubahan besar dalam menjaga
+          lingkungan.
+        </p>
+        <a href="#" class="btn-mulai">Mulai</a>
+      </div>
+      <div class="hero-image">
+        <img src="hero-illustration.png" alt="Ilustrasi Hero" />
+      </div>
+    </section>
+
+    <!-- Section Pencapaian -->
+    <section class="pencapaian">
+      <h2>PENCAPAIAN ECOSORT</h2>
+      <p>
+        Teknologi EcoSort dirancang untuk memilah sampah berdasarkan jenisnya
+        melalui foto sampah yang diunggah, serta memberikan informasi tentang
+        lokasi, kapasitas, dan jadwal TPS/TPA di berbagai daerah di Indonesia.
+      </p>
+      <div class="stats">
+        <div class="card">
+          <h3>1jt Kg+</h3>
+          <p>Sampah di Daur Ulang</p>
         </div>
-
-        <script>
-  function login() {
-    const username = document.getElementById("username").value.trim();
-    const password = document.getElementById("password").value.trim();
-
-    if (!username || !password) {
-      alert("Harap masukkan username dan password!");
-      return;
-    }
-
-    const users = JSON.parse(localStorage.getItem("users")) || [];
-
-    const user = users.find(u => u.username === username && u.password === password);
-
-    if (!user) {
-      alert("Username atau password salah!");
-      return;
-    }
-
-    // Simpan ke localStorage agar dashboard bisa membaca
-    localStorage.setItem("user", JSON.stringify(user));
-    localStorage.setItem("saldo", user.saldo || 0); // jika ada saldo
-
-    alert("Login berhasil!");
-    window.location.href = "dashboard.html";
-  }
-</script>
-
-    </body>
-
+        <div class="card">
+          <h3>500+</h3>
+          <p>Cabang</p>
+        </div>
+        <div class="card">
+          <h3>15 Kab+</h3>
+          <p>Lokasi TPS/TPA</p>
+        </div>
+        <div class="card">
+          <h3>30rb+</h3>
+          <p>Pengguna</p>
+        </div>
+      </div>
+    </section>
+  </body>
 </html>
