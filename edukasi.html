@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Edukasi Sampah Plastik</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background-color: #f0fdf4;
+      color: #166534;
+      overflow-x: hidden;
+    }
+
+    header {
+      background: #166534;
+      color: white;
+      text-align: center;
+      padding: 60px 20px;
+      border-bottom: 4px solid #14532d;
+      border-radius: 0 0 20px 20px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    }
+
+    header h1 {
+      font-size: 2.6rem;
+      margin-bottom: 10px;
+    }
+
+    header p {
+      font-size: 1.2rem;
+      opacity: 0.95;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      background: white;
+      padding: 15px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.05);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    nav a {
+      text-decoration: none;
+      font-weight: 600;
+      color: #166534;
+      transition: all 0.3s ease;
+      padding: 8px 16px;
+      border-radius: 8px;
+    }
+
+    nav a:hover {
+      background: #d1fae5;
+      color: #0f3d26;
+    }
+
+    .section {
+      padding: 60px 25px;
+      max-width: 1000px;
+      margin: 40px auto;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.07);
+      transition: transform 0.3s ease;
+    }
+
+    .section:hover {
+      transform: translateY(-2px);
+    }
+
+    .section h2 {
+      color: #14532d;
+      margin-bottom: 20px;
+      font-size: 1.9rem;
+    }
+
+    .section p,
+    .section ul {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: #333;
+    }
+
+    .section ul {
+      padding-left: 20px;
+    }
+
+    .image-section {
+      text-align: center;
+      margin: 40px 0;
+    }
+
+    .image-section img {
+      width: 100%;
+      max-width: 700px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
+
+    .quiz-section button {
+      background: #ffc107;
+      color: #333;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 12px;
+      font-size: 1rem;
+      margin-top: 20px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background 0.3s ease, transform 0.2s;
+    }
+
+    .quiz-section button:hover {
+      background: #e6b100;
+      transform: scale(1.03);
+    }
+
+    .quiz-result {
+      margin-top: 15px;
+      font-weight: bold;
+      color: #166534;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      background: #166534;
+      color: white;
+      margin-top: 60px;
+      font-size: 0.95rem;
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+    }
+
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2rem;
+      }
+
+      nav {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .section {
+        padding: 40px 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Edukasi Sampah Plastik</h1>
+    <p>Bersama kita cegah pencemaran lingkungan!</p>
+  </header>
+
+  <nav>
+    <a href="#masalah">Masalah</a>
+    <a href="#dampak">Dampak</a>
+    <a href="#solusi">Solusi</a>
+    <a href="#aksi">Aksi</a>
+    <a href="#quiz">Kuis</a>
+  </nav>
+
+  <section id="masalah" class="section">
+    <h2>Masalah Sampah Plastik</h2>
+    <p>
+      Setiap tahunnya, jutaan ton sampah plastik mencemari laut dan daratan Indonesia. Minimnya pengelolaan serta kesadaran masyarakat menjadi penyebab utama meningkatnya volume sampah.
+    </p>
+    <div class="image-section">
+      <img src="images/sampahplastik.png" alt="Pencemaran Laut oleh Sampah Plastik" />
+    </div>
+  </section>
+
+  <section id="dampak" class="section">
+    <h2>Dampak Buruk Sampah Plastik</h2>
+    <ul>
+      <li>Mengancam kehidupan laut seperti ikan dan penyu</li>
+      <li>Mencemari air dan tanah</li>
+      <li>Berpotensi merusak rantai makanan</li>
+      <li>Menimbulkan penyakit akibat bahan kimia berbahaya</li>
+    </ul>
+  </section>
+
+  <section id="solusi" class="section">
+    <h2>Solusi dan Pencegahan</h2>
+    <ul>
+      <li>Mengurangi penggunaan plastik sekali pakai</li>
+      <li>Gunakan produk daur ulang dan ramah lingkungan</li>
+      <li>Mengikuti program daur ulang dan bank sampah</li>
+      <li>Mengedukasi masyarakat sekitar secara aktif</li>
+    </ul>
+    <div class="image-section">
+      <img src="images/daurulang.jpg" alt="Ilustrasi Proses Daur Ulang" />
+    </div>
+  </section>
+
+  <section id="aksi" class="section">
+    <h2>Apa yang Bisa Kamu Lakukan?</h2>
+    <p>
+      Mulailah dari hal kecil: membawa tas belanja sendiri, menghindari sedotan plastik, memilah sampah di rumah, dan menyebarkan informasi ini kepada orang lain.
+    </p>
+  </section>
+
+  <section id="quiz" class="section quiz-section">
+    <h2>Kuis Edukasi!</h2>
+    <p><strong>Pertanyaan:</strong> Berapa lama plastik bisa terurai di alam?</p>
+    <button onclick="showAnswer()">Lihat Jawaban</button>
+    <div id="quiz-result" class="quiz-result"></div>
+  </section>
+
+  <footer>
+    &copy; 2025 Edukasi Lingkungan. Semua Hak Dilindungi.<br/>
+    Website by Greenovate Unimus.
+  </footer>
+
+  <script>
+    function showAnswer() {
+      document.getElementById("quiz-result").innerText = "Plastik bisa terurai hingga 450 tahun atau lebih di alam.";
+    }
+  </script>
+</body>
+</html>
