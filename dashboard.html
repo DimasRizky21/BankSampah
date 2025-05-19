@@ -1,224 +1,202 @@
 <!DOCTYPE html>
 <html lang="id">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PayTrash</title>
-    <style>
-      body {
-        color: #166534;
-        margin: 0;
-        font-family: Montserrat, sans-serif;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PayTrash</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Montserrat, sans-serif;
+      background-color: #f0fdf4;
+      color: #166534;
+    }
 
+    .container {
+      background-image: url('images/green.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      padding: 40px 5%;
+      box-sizing: border-box;
+    }
+
+    .text-content {
+      max-width: 500px;
+    }
+
+    #username-display {
+      background-color: #e6f9e5;
+      padding: 10px 20px;
+      border-radius: 12px;
+      font-weight: bold;
+      font-size: 18px;
+      margin-bottom: 15px;
+      display: inline-block;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      font-size: 42px;
+      margin-bottom: 10px;
+    }
+
+    .card {
+      background-color: white;
+      border-radius: 12px;
+      padding: 20px;
+      margin-top: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .card h3 {
+      margin: 0 0 10px;
+      font-size: 18px;
+    }
+
+    .card p {
+      font-size: 28px;
+      font-weight: bold;
+      color: #0d6e5c;
+      margin: 0;
+    }
+
+    .button {
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .button::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(255,255,255,0.2);
+      z-index: -1;
+      transition: transform 0.3s ease;
+      transform: scaleX(0);
+      transform-origin: left;
+    }
+
+    .button:hover::before {
+      transform: scaleX(1);
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    }
+
+    .setor {
+      background-color: #28a745;
+      color: white;
+    }
+
+    .redeem {
+      background-color: #ffc107;
+      color: #333;
+    }
+
+    .logout {
+      background-color: #dc3545;
+      color: white;
+    }
+
+    .logout-button {
+      position: absolute;
+      top: 20px;
+      right: 40px;
+    }
+
+    .image-buttons-wrapper {
+      position: relative;
+      width: 500px;
+      max-width: 90%;
+    }
+
+    .pict {
+      width: 100%;
+    }
+
+    .button-group {
+      margin-top: 20px;
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    @media (max-width: 768px) {
       .container {
-        background-image: url("images/green.png");
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-color: #c9f2c7;
-        width: 100vw;
-        height: 100vh;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0 5%;
-        box-sizing: border-box;
-        position: relative;
-      }
-
-      .text-content {
-        max-width: 500px;
-      }
-
-      .text-content h1 {
-        font-size: 36px;
-      }
-
-      .text-content p {
-        font-size: 15px;
-      }
-
-      .card h3 {
-        margin-bottom: 10px;
-        color: #166534;
-      }
-
-      .card p {
-        font-size: 24px;
-        font-weight: bold;
-        color: #065f46;
-      }
-
-      .button {
-        padding: 10px 20px;
-        font-size: 18px;
-        border: none;
-        border-radius: 12px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        color: white;
-        position: relative;
-        overflow: hidden;
-        z-index: 1;
-      }
-
-      .button::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(255, 255, 255, 0.2);
-        z-index: -1;
-        transition: transform 0.3s ease;
-        transform: scaleX(0);
-        transform-origin: left;
-      }
-
-      .button:hover::before {
-        transform: scaleX(1);
-      }
-
-      .setor {
-        background-color: #28a745;
-        color: #166534;
-      }
-
-      .redeem {
-        background-color: #ffc107;
-        color: #166534;
-      }
-
-      .logout {
-        background-color: #dc3545;
-        color: #fff;
+        flex-direction: column;
+        padding: 20px;
       }
 
       .logout-button {
-        position: absolute;
-        top: 20px;
-        right: 60px;
-        z-index: 10;
-      }
-
-      .edukasi {
-        background-image: url("images/pict2.png");
-        background-size: 150px;
-        background-repeat: no-repeat;
-        padding: 12px;
-        width: 100%;
-        height: 150px;
-        margin-top: 12px;
-        border: none;
-        border-radius: 10px;
-        background-color: #c9f2c7;
-        color: #166534;
-        font-weight: bold;
-      }
-
-      .button:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-      }
-
-      .image-buttons-wrapper {
-        position: relative;
-        width: 600px;
-        padding-right: 10%;
-      }
-
-      .pict {
-        width: 100%;
+        top: 10px;
+        right: 10px;
       }
 
       .button-group {
-        position: absolute;
-        bottom: -70px;
-        right: 180px;
-        display: flex;
-        flex-direction: row;
-        gap: 20px;
+        flex-direction: column;
+        align-items: center;
       }
+    }
+  </style>
+</head>
+<body>
 
-      @media (max-width: 768px) {
-        .container {
-          flex-direction: column;
-          height: auto;
-          padding: 20px;
-        }
+  <button class="button logout logout-button" onclick="logout()">Logout</button>
 
-        .image-buttons-wrapper {
-          width: 100%;
-          padding-right: 0;
-        }
+  <div class="container">
+    <div class="text-content">
+      <div id="username-display"></div>
+      <h1>ReTrash</h1>
 
-        .button-group {
-          position: static;
-          flex-direction: row;
-          justify-content: center;
-          margin-top: 20px;
-        }
-
-        .pict {
-          width: 100%;
-          height: auto;
-        }
-
-        .logout-button {
-          top: 10px;
-          right: 10px;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <button class="button logout logout-button" onclick="logout()">
-      Logout
-    </button>
-
-    <div class="container">
-      <div class="text-content">
-        <h1>ReTrash</h1>
-        <div class="card">
-          <h3>Saldo Tabungan Sampah</h3>
-          <p id="saldo">Rp 0</p>
-        </div>
-        <br />
-        <!-- <button class="button edukasi">Edukasi Sampah</button> -->
+      <div class="card">
+        <h3>Saldo Tabungan Sampah</h3>
+        <p id="saldo">Rp 0</p>
       </div>
 
-      <div class="image-buttons-wrapper">
-        <img src="images/pict.png" class="pict" alt="Ilustrasi" />
-        <div class="button-group">
-          <button
-            class="button setor"
-            onclick="window.location.href='setor.html'"
-          >
-            Setor Sampah
-          </button>
-          <button
-            class="button redeem"
-            onclick="window.location.href='redeem.html'"
-          >
-            Redeem Hadiah
-          </button>
-        </div>
+      <div class="button-group">
+        <button class="button setor">Setor Sampah</button>
+        <button class="button redeem">Redeem Hadiah</button>
       </div>
     </div>
 
-    <script>
-      const user = localStorage.getItem("user");
-      if (!user) window.location.href = "index.html";
+    <div class="image-buttons-wrapper">
+      <img src="images/pict.png" class="pict" alt="Ilustrasi">
+    </div>
+  </div>
 
-      const saldo = localStorage.getItem("saldo") || 0;
-      document.getElementById("saldo").innerText = "Rp " + saldo;
+  <script>
+    const userStr = localStorage.getItem("user");
+if (!userStr) window.location.href = "index.html";
 
-      function logout() {
-        localStorage.clear();
-        window.location.href = "login.html";
-      }
-    </script>
-  </body>
+const user = JSON.parse(userStr); // ubah string jadi objek
+document.getElementById("username-display").innerText = "👤 Halo, " + user.username;
+
+
+    const saldo = localStorage.getItem("saldo") || 0;
+    document.getElementById("saldo").innerText = "Rp " + saldo;
+
+    function logout() {
+      localStorage.clear();
+      window.location.href = "index.html";
+    }
+  </script>
+
+</body>
 </html>
