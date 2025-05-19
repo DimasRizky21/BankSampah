@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>PayTrash</title>
+  <title>Greenovate Unimus</title>
   <style>
     body {
       margin: 0;
@@ -163,7 +163,7 @@
   <div class="container">
     <div class="text-content">
       <div id="username-display"></div>
-      <h1>ReTrash</h1>
+      <h1>Greenovate</h1>
 
       <div class="card">
         <h3>Saldo Tabungan Sampah</h3>
@@ -171,8 +171,8 @@
       </div>
 
       <div class="button-group">
-        <button class="button setor">Setor Sampah</button>
-        <button class="button redeem">Redeem Hadiah</button>
+        <button class="button setor" onclick="window.location.href='setor.html'">Setor Sampah</button>
+        <button class="button redeem" onclick="window.location.href='redeem.html'">Redeem Hadiah</button>
       </div>
     </div>
 
@@ -183,10 +183,10 @@
 
   <script>
     const userStr = localStorage.getItem("user");
-if (!userStr) window.location.href = "index.html";
+    if (!userStr) window.location.href = "index.html";
 
-const user = JSON.parse(userStr); // ubah string jadi objek
-document.getElementById("username-display").innerText = "👤 Halo, " + user.username;
+    const user = JSON.parse(userStr);
+    document.getElementById("username-display").innerText = "👤 Halo, " + user.username;
 
 
     const saldo = localStorage.getItem("saldo") || 0;
