@@ -188,9 +188,10 @@
     const user = JSON.parse(userStr);
     document.getElementById("username-display").innerText = "👤 Halo, " + user.username;
 
-
-    const saldo = localStorage.getItem("saldo") || 0;
+    const saldoKey = "saldo_" + user.username;
+    const saldo = localStorage.getItem(saldoKey) || 0;
     document.getElementById("saldo").innerText = "Rp " + saldo;
+
 
     function logout() {
       localStorage.clear();

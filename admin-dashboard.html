@@ -1,188 +1,113 @@
-<!-- <!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8">
-  <title>Dashboard Admin - Bank Sampah</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      background-color: #f9fafb;
-      padding: 40px 20px;
-    }
-    .container {
-      max-width: 700px;
-      margin: auto;
-      background: white;
-      padding: 30px;
-      border-radius: 15px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
-    h2 {
-      color: #1f2937;
-      text-align: center;
-    }
-    .card {
-      background-color: #e0f2fe;
-      padding: 20px;
-      border-radius: 12px;
-      margin: 20px 0;
-      text-align: center;
-    }
-    .card h3 {
-      margin-bottom: 10px;
-      color: #0369a1;
-    }
-    .card p {
-      font-size: 24px;
-      font-weight: bold;
-      color: #0c4a6e;
-    }
-    button {
-      padding: 12px;
-      width: 100%;
-      margin-top: 12px;
-      border: none;
-      border-radius: 8px;
-      background-color: #0284c7;
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #0369a1;
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <h2>Selamat Datang, Admin 👋</h2>
-
-    <div class="card">
-      <h3>Total Setoran</h3>
-      <p id="totalSetoran">0 Transaksi</p>
-    </div>
-
-    <div class="card">
-      <h3>Total Saldo Semua User</h3>
-      <p id="totalSaldo">Rp 0</p>
-    </div>
-
-    <button onclick="window.location.href='daftar_user.html'">📄 Daftar User & Saldo</button>
-    <button onclick="window.location.href='verifikasi_setoran.html'">✅ Verifikasi Setoran</button>
-    <button onclick="resetData()">♻️ Reset Data & Saldo</button>
-    <button onclick="logout()">🚪 Logout</button>
-  </div>
-
-  <script>
-    // Simulasi data dummy, nanti bisa dihubungkan ke backend atau localStorage
-    const dataUser = JSON.parse(localStorage.getItem("dataUser")) || [];
-
-    let totalSetoran = 0;
-    let totalSaldo = 0;
-
-    dataUser.forEach(user => {
-      totalSetoran += user.transaksi || 0;
-      totalSaldo += user.saldo || 0;
-    });
-
-    document.getElementById("totalSetoran").innerText = totalSetoran + " Transaksi";
-    document.getElementById("totalSaldo").innerText = "Rp " + totalSaldo.toLocaleString();
-
-    function logout() {
-      localStorage.removeItem("admin");
-      window.location.href = "admin_login.html";
-    }
-
-    function resetData() {
-      if (confirm("Yakin ingin mereset semua data dan saldo user?")) {
-        localStorage.removeItem("dataUser");
-        alert("Data berhasil direset.");
-        location.reload();
-      }
-    }
-  </script>
-</body>
-</html> -->
-
 <!DOCTYPE html>
 <html lang="id">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin - Bank Sampah</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      background-color: #f1f5f9;
-      margin: 0;
-    }
-    header {
-      background-color: #0f172a;
-      color: white;
-      padding: 20px;
-      text-align: center;
-    }
-    .container {
-      max-width: 900px;
-      margin: 30px auto;
-      background: white;
-      padding: 30px;
-      border-radius: 15px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    }
-    h2 {
-      color: #1e293b;
-    }
-    nav {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 20px;
-    }
-    nav button {
-      flex: 1;
-      padding: 12px;
-      border: none;
-      border-radius: 8px;
-      background-color: #3b82f6;
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
-    }
-    nav button:hover {
-      background-color: #2563eb;
-    }
-    .logout-btn {
-      background-color: #ef4444;
-    }
-    .logout-btn:hover {
-      background-color: #dc2626;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-    }
-    table, th, td {
-      border: 1px solid #cbd5e1;
-    }
-    th, td {
-      padding: 12px;
-      text-align: left;
-    }
-    th {
-      background-color: #f8fafc;
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <h1>Admin Panel - Bank Sampah</h1>
-  </header>
 
-  <div class="container">
-    <h2>Halo Admin 👋</h2>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Bank Sampah</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+      body {
+        font-family: 'Poppins', sans-serif;
+        background-color: #f1f5f9;
+        margin: 0;
+        padding: 0;
+      }
+
+      header {
+        background-color: #0f172a;
+        color: white;
+        padding: 20px;
+        text-align: center;
+      }
+
+      nav {
+        display: flex;
+        gap: 10px;
+        padding: 20px;
+        background: #e2e8f0;
+        justify-content: center;
+      }
+
+      nav button {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 8px;
+        background-color: #3b82f6;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+      }
+
+      nav button:hover {
+        background-color: #2563eb;
+      }
+
+      .logout-btn {
+        background-color: #ef4444;
+      }
+
+      .logout-btn:hover {
+        background-color: #dc2626;
+      }
+
+      .container {
+        max-width: 700px;
+        margin: 30px auto;
+        background: white;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      h2 {
+        color: #1f2937;
+        text-align: center;
+      }
+
+      .card {
+        background-color: #e0f2fe;
+        padding: 20px;
+        border-radius: 12px;
+        margin: 20px 0;
+        text-align: center;
+      }
+
+      .card h3 {
+        margin-bottom: 10px;
+        color: #0369a1;
+      }
+
+      .card p {
+        font-size: 24px;
+        font-weight: bold;
+        color: #0c4a6e;
+      }
+
+      button.action-btn {
+        padding: 12px;
+        width: 100%;
+        margin-top: 12px;
+        border: none;
+        border-radius: 8px;
+        background-color: #0284c7;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+      }
+
+      button.action-btn:hover {
+        background-color: #0369a1;
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <header>
+      <h1>Admin Panel - Bank Sampah</h1>
+    </header>
+
     <nav>
       <button onclick="location.href='dashboard-admin.html'">Dashboard</button>
       <button onclick="location.href='setoran-admin.html'">Setoran</button>
@@ -190,14 +115,59 @@
       <button class="logout-btn" onclick="logout()">Logout</button>
     </nav>
 
-    <p>Silakan pilih menu di atas untuk mengelola data pengguna dan transaksi.</p>
-  </div>
+    <div class="container">
+      <h2>Selamat Datang, Admin 👋</h2>
 
-  <script>
-    function logout() {
-      localStorage.clear();
-      window.location.href = 'index.html';
-    }
-  </script>
-</body>
+      <div class="card">
+        <h3>Total Setoran</h3>
+        <p id="totalSetoran">0 Transaksi</p>
+      </div>
+
+      <div class="card">
+        <h3>Total Saldo Semua User</h3>
+        <p id="totalSaldo">Rp 0</p>
+      </div>
+
+      <button class="action-btn" onclick="window.location.href='daftar_user.html'">📄 Daftar User & Saldo</button>
+      <button class="action-btn" onclick="window.location.href='verifikasi_setoran.html'">✅ Verifikasi Setoran</button>
+      <button class="action-btn" onclick="resetData()">♻️ Reset Data & Saldo</button>
+    </div>
+
+    <script>
+      // Cek apakah admin sudah login
+      const currentAdmin = localStorage.getItem("adminLogin");
+      if (!currentAdmin) {
+        window.location.href = "admin-login.html";
+      }
+
+      // Hitung total setoran dan saldo
+      const dataUser = JSON.parse(localStorage.getItem("dataUser")) || [];
+
+      let totalSetoran = 0;
+      let totalSaldo = 0;
+
+      dataUser.forEach(user => {
+        totalSetoran += user.transaksi || 0;
+        totalSaldo += user.saldo || 0;
+      });
+
+      document.getElementById("totalSetoran").innerText = totalSetoran + " Transaksi";
+      document.getElementById("totalSaldo").innerText = "Rp " + totalSaldo.toLocaleString("id-ID");
+
+      function logout() {
+        localStorage.removeItem("adminLogin");
+        window.location.href = "admin-login.html";
+      }
+
+      function resetData() {
+        if (confirm("Yakin ingin mereset semua data dan saldo user?")) {
+          localStorage.removeItem("dataUser");
+          alert("Data berhasil direset.");
+          location.reload();
+        }
+      }
+    </script>
+
+  </body>
+
 </html>
