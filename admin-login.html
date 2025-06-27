@@ -103,34 +103,38 @@
 
   <script>
   function loginAdmin() {
-    const usernameInput = document.getElementById("username");
-    const passwordInput = document.getElementById("password");
+      const usernameInput = document.getElementById("username");
+      const passwordInput = document.getElementById("password");
 
-    const username = usernameInput.value.trim(); 
-    const password = passwordInput.value;  
+      const username = usernameInput.value.trim();
+      const password = passwordInput.value.trim();
 
-    const admins = JSON.parse(localStorage.getItem("adminAccounts")) || {};
+      const admins = JSON.parse(localStorage.getItem("adminAccounts")) || {};
 
-    if (admins[username] && admins[username] === password) {
-      localStorage.setItem("adminLogin", username);
-      window.location.href = "admin-dashboard.html"; // langsung redirect
-    } else {
+      if (admins[username] && admins[username] === password) {
+        localStorage.setItem("user", JSON.stringify({ username }));
 
-      PNotify.alert({
-        text: 'Username atau password salah.',
-        type: 'error',
-        delay: 500,
-        addClass: 'custom-notify',
-        closer: true,        
-        sticker: false,     
-      });
+        const saldoKey = "saldo_" + username;
+        if (!localStorage.getItem(saldoKey)) {
+          localStorage.setItem(saldoKey, "0");
+        }
 
+        window.location.href = "dashboard.html";
+      } else {
+        PNotify.alert({
+          text: 'Username atau password salah.',
+          type: 'error',
+          delay: 500,
+          addClass: 'custom-notify',
+          closer: true,
+          sticker: false,
+        });
 
-      usernameInput.value = ""; // Kosongkan input username
-      passwordInput.value = ""; // Kosongkan input password
-      usernameInput.focus(); // Fokuskan kembali ke input username
+        usernameInput.value = "";
+        passwordInput.value = "";
+        usernameInput.focus();
+      }
     }
-  }
 </script>
   <link href="https://cdn.jsdelivr.net/npm/@pnotify/core@5.2.0/dist/PNotify.css" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/@pnotify/core@5.2.0/dist/PNotify.js"></script>
