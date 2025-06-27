@@ -1,203 +1,168 @@
-<!-- <!DOCTYPE html>
-<html lang="id">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Dashboard Admin - Bank Sampah</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GreenOvate Admin Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
   <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
     body {
-      font-family: 'Poppins', sans-serif;
-      background-color: #f9fafb;
-      padding: 40px 20px;
+      font-family: 'Montserrat', sans-serif;
+      background-color: #f5fafd;
+      color: #1a1a1a;
+      display: flex;
     }
-    .container {
-      max-width: 700px;
-      margin: auto;
-      background: white;
+    .sidebar {
+      width: 220px;
+      background-color: #166534;
+      padding: 20px;
+      box-shadow: 2px 0 10px rgba(0,0,0,0.05);
+      height: 100vh;
+      color: #ffffff;
+    }
+    .sidebar h2 {
+      font-size: 22px;
+      margin-bottom: 20px;
+    }
+    .sidebar nav a {
+      display: flex;
+      align-items: center;
+      padding: 12px;
+      margin-bottom: 10px;
+      text-decoration: none;
+      color: #ffffff;
+      border-radius: 8px;
+      transition: 0.3s;
+    }
+    .sidebar nav a:hover {
+      background-color: #1b7c4d;
+    }
+    .main {
+      flex: 1;
       padding: 30px;
-      border-radius: 15px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      background-color: #f0fdf4;
     }
-    h2 {
-      color: #1f2937;
-      text-align: center;
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+    .cards {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 30px;
     }
     .card {
-      background-color: #e0f2fe;
+      background: linear-gradient(135deg, #c6f6d5, #9ae6b4);
+      border-radius: 15px;
       padding: 20px;
-      border-radius: 12px;
-      margin: 20px 0;
+      flex: 1;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
       text-align: center;
+      color: #1c4532;
     }
     .card h3 {
+      font-size: 14px;
       margin-bottom: 10px;
-      color: #0369a1;
     }
     .card p {
       font-size: 24px;
       font-weight: bold;
-      color: #0c4a6e;
     }
-    button {
-      padding: 12px;
-      width: 100%;
-      margin-top: 12px;
-      border: none;
-      border-radius: 8px;
-      background-color: #0284c7;
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #0369a1;
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <h2>Selamat Datang, Admin 👋</h2>
-
-    <div class="card">
-      <h3>Total Setoran</h3>
-      <p id="totalSetoran">0 Transaksi</p>
-    </div>
-
-    <div class="card">
-      <h3>Total Saldo Semua User</h3>
-      <p id="totalSaldo">Rp 0</p>
-    </div>
-
-    <button onclick="window.location.href='daftar_user.html'">📄 Daftar User & Saldo</button>
-    <button onclick="window.location.href='verifikasi_setoran.html'">✅ Verifikasi Setoran</button>
-    <button onclick="resetData()">♻️ Reset Data & Saldo</button>
-    <button onclick="logout()">🚪 Logout</button>
-  </div>
-
-  <script>
-    // Simulasi data dummy, nanti bisa dihubungkan ke backend atau localStorage
-    const dataUser = JSON.parse(localStorage.getItem("dataUser")) || [];
-
-    let totalSetoran = 0;
-    let totalSaldo = 0;
-
-    dataUser.forEach(user => {
-      totalSetoran += user.transaksi || 0;
-      totalSaldo += user.saldo || 0;
-    });
-
-    document.getElementById("totalSetoran").innerText = totalSetoran + " Transaksi";
-    document.getElementById("totalSaldo").innerText = "Rp " + totalSaldo.toLocaleString();
-
-    function logout() {
-      localStorage.removeItem("admin");
-      window.location.href = "admin_login.html";
-    }
-
-    function resetData() {
-      if (confirm("Yakin ingin mereset semua data dan saldo user?")) {
-        localStorage.removeItem("dataUser");
-        alert("Data berhasil direset.");
-        location.reload();
-      }
-    }
-  </script>
-</body>
-</html> -->
-
-<!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin - Bank Sampah</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      background-color: #f1f5f9;
-      margin: 0;
-    }
-    header {
-      background-color: #0f172a;
-      color: white;
+    .chart {
+      background: linear-gradient(135deg, #ebf8ff, #bee3f8);
       padding: 20px;
-      text-align: center;
-    }
-    .container {
-      max-width: 900px;
-      margin: 30px auto;
-      background: white;
-      padding: 30px;
       border-radius: 15px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      margin-bottom: 30px;
     }
-    h2 {
-      color: #1e293b;
+    .transactions {
+      background: linear-gradient(135deg, #fff5f5, #fed7d7);
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
     }
-    nav {
+    .transactions h3 {
+      margin-bottom: 15px;
+      color: #822727;
+    }
+    .transaction {
       display: flex;
-      gap: 10px;
-      margin-bottom: 20px;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid #eee;
     }
-    nav button {
-      flex: 1;
-      padding: 12px;
-      border: none;
-      border-radius: 8px;
-      background-color: #3b82f6;
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
-    }
-    nav button:hover {
-      background-color: #2563eb;
-    }
-    .logout-btn {
-      background-color: #ef4444;
-    }
-    .logout-btn:hover {
-      background-color: #dc2626;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-    }
-    table, th, td {
-      border: 1px solid #cbd5e1;
-    }
-    th, td {
-      padding: 12px;
-      text-align: left;
-    }
-    th {
-      background-color: #f8fafc;
+    .transaction:last-child {
+      border-bottom: none;
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Admin Panel - Bank Sampah</h1>
-  </header>
-
-  <div class="container">
-    <h2>Halo Admin 👋</h2>
+  <aside class="sidebar">
+    <h2>GreenOvate</h2>
     <nav>
-      <button onclick="location.href='dashboard-admin.html'">Dashboard</button>
-      <button onclick="location.href='setoran-admin.html'">Setoran</button>
-      <button onclick="location.href='redeem-admin.html'">Redeem</button>
-      <button class="logout-btn" onclick="logout()">Logout</button>
+      <a href="#">Dashboard</a>
+      <a href="#">Customer</a>
+      <a href="#">Category</a>
+      <a href="#">Transaction</a>
+      <a href="#">Pick-up</a>
+      <a href="#">Stock</a>
+      <a href="#">Financial</a>
+      <a href="#">Report</a>
     </nav>
+  </aside>
 
-    <p>Silakan pilih menu di atas untuk mengelola data pengguna dan transaksi.</p>
-  </div>
+  <main class="main">
+    <div class="header">
+      <h1>Overview</h1>
+      <input type="text" placeholder="Search..." style="padding: 8px; border-radius: 8px; border: 1px solid #ccc;">
+    </div>
 
-  <script>
-    function logout() {
-      localStorage.clear();
-      window.location.href = 'index.html';
-    }
-  </script>
+    <div class="cards">
+      <div class="card">
+        <h3>Customer</h3>
+        <p>1,300</p>
+      </div>
+      <div class="card">
+        <h3>Employees</h3>
+        <p>42</p>
+      </div>
+      <div class="card">
+        <h3>Requests</h3>
+        <p>128</p>
+      </div>
+    </div>
+
+    <div class="chart">
+      <h3>In & Out</h3>
+      <p>[ Grafik Placeholder ]</p>
+    </div>
+
+    <div class="transactions">
+      <h3>Last Transactions</h3>
+      <div class="transaction">
+        <span>Deposit Waste - Hotel Garden</span>
+        <span>$291</span>
+      </div>
+      <div class="transaction">
+        <span>Deposit Waste - Plastic Factory</span>
+        <span>$691</span>
+      </div>
+      <div class="transaction">
+        <span>Transfer Deposit - Andy</span>
+        <span>$80</span>
+      </div>
+      <div class="transaction">
+        <span>Deposit Waste - Plastic Factory</span>
+        <span>$256</span>
+      </div>
+    </div>
+  </main>
 </body>
 </html>
