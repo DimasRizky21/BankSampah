@@ -1,3 +1,16 @@
+<?php
+$host = "localhost";
+$user = "root";
+$pass = "";
+$db   = "banksampah"; // Sesuaikan dengan nama database kamu
+
+$koneksi = mysqli_connect("localhost:3307", $user, $pass, $db);
+
+if (!$koneksi) {
+    die("Koneksi gagal: " . mysqli_connect_error());
+}
+?>
+
 <!DOCTYPE html>
 <html lang="id">
   <head>
