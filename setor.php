@@ -1,5 +1,28 @@
+<?php
+include 'koneksi.php'; // Panggil koneksi.php BUKAN bikin ulang koneksi
+
+$id_user = 1; // Hardcode, atau ambil dari session
+$id_jenis = $_POST['id_jenis'];
+$jumlah = $_POST['jumlah'];
+$total_harga = $_POST['total_harga'];
+$tanggal = date("Y-m-d");
+
+$sql = "INSERT INTO setoran (id_user, id_jenis, jumlah, total_harga, tanggal) 
+VALUES ('$id_user', '$id_jenis', '$jumlah', '$total_harga', '$tanggal')";
+
+if ($koneksi->query($sql) === TRUE) {
+  echo "Setoran berhasil disimpan!";
+} else {
+  echo "Gagal simpan: " . $koneksi->error;
+}
+
+$koneksi->close();
+?>
+
+
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
   <meta charset="UTF-8">
   <title>Setor Sampah</title>
@@ -19,7 +42,7 @@
       background: white;
       padding: 30px 25px;
       border-radius: 15px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
       box-sizing: border-box;
     }
 
@@ -78,10 +101,11 @@
     button::before {
       content: '';
       position: absolute;
-      top: 0; left: 0;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(255,255,255,0.2);
+      background-color: rgba(255, 255, 255, 0.2);
       z-index: -1;
       transition: transform 0.3s ease;
       transform: scaleX(0);
@@ -94,7 +118,7 @@
 
     button:hover {
       transform: translateY(-2px);
-      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
     }
 
     .back-link {
@@ -111,6 +135,7 @@
     }
   </style>
 </head>
+
 <body>
   <div class="form">
     <h2>Form Setor Sampah</h2>
@@ -156,4 +181,5 @@
     }
   </script>
 </body>
+
 </html>
