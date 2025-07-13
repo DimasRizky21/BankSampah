@@ -338,7 +338,7 @@ if (!$koneksi) {
           <a href="#">Informasi</a>
           <a href="#">Layanan</a>
         </nav>
-        <a href="login.html" class="btn-masuk">MASUK</a>
+        <a href="login.php" class="btn-masuk">MASUK</a>
       </div>
     </header>
 
