@@ -96,7 +96,7 @@
       <input type="password" id="password" placeholder="Password"/>
       <button onclick="loginAdmin()">Login</button>
       <div class="link">
-        Belum punya akun admin? <a href="admin-register.html">Daftar di sini</a>
+        Belum punya akun admin? <a href="admin-register.php">Daftar di sini</a>
       </div>
     </div>
   </div>
@@ -119,7 +119,7 @@
           localStorage.setItem(saldoKey, "0");
         }
 
-        window.location.href = "dashboard.html";
+        window.location.href = "admin-dashboard.php";
       } else {
         PNotify.alert({
           text: 'Username atau password salah.',
