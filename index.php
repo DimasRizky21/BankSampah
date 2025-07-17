@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -43,13 +42,62 @@
       font-weight: 500;
     }
 
-    .btn-masuk {
+    /* Dropdown Button */
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-toggle {
       background-color: white;
       color: #1abc61;
       padding: 8px 20px;
+      border: none;
       border-radius: 6px;
-      text-decoration: none;
       font-weight: 600;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background-color 0.3s ease;
+    }
+
+    .dropdown-toggle:hover {
+      background-color: #f3f3f3;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      right: 0;
+      background-color: #ffffff;
+      min-width: 200px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+      z-index: 999;
+      border-radius: 8px;
+      padding: 8px 0;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: all 0.3s ease;
+    }
+
+    .dropdown-content a {
+      color: #1abc61;
+      padding: 10px 20px;
+      text-decoration: none;
+      display: block;
+      font-weight: 500;
+      font-size: 14px;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #f0f0f0;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
     }
 
     /* Hero Section */
@@ -205,7 +253,7 @@
       font-weight: 500;
     }
 
-    /* GREENOVATE CTA */
+    /* CTA */
     .greenovate-cta {
       padding: 220px 10%;
       text-align: center;
@@ -233,11 +281,7 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
-      align-items: flex-start;
       gap: 30px;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
     }
 
     .footer-col {
@@ -250,7 +294,8 @@
       margin-bottom: 15px;
     }
 
-    .footer-col p {
+    .footer-col p,
+    .footer-col ul li {
       font-size: 14px;
       line-height: 1.6;
     }
@@ -258,10 +303,6 @@
     .footer-col ul {
       list-style: none;
       padding: 0;
-    }
-
-    .footer-col ul li {
-      margin-bottom: 10px;
     }
 
     .footer-col ul li a {
@@ -331,7 +372,14 @@
         <a href="#informasi-section">Informasi</a>
         <a href="#layanan-section">Layanan</a>
       </nav>
-      <a href="login.php" class="btn-masuk">MASUK</a>
+      <!-- Dropdown login -->
+      <div class="dropdown">
+        <button class="dropdown-toggle">MASUK</button>
+        <div class="dropdown-content">
+          <a href="login.php">Masuk sebagai User</a>
+          <a href="admin-login.php">Masuk sebagai Admin</a>
+        </div>
+      </div>
     </div>
   </header>
 
@@ -339,12 +387,7 @@
   <section id="hero-section" class="hero">
     <div class="hero-text">
       <h1>Halo, Sahabat Greenovate UNIMUS!</h1>
-      <p>
-        Bersiaplah untuk menjadikan pengolahan sampah sebagai momen yang lebih
-        menyenangkan. Ayo mulai perjalanan hijau kita! Jangan lupa untuk
-        mengupload foto sampah dan mendaur ulangnya. Setiap tindakan kecil
-        bisa akan membuat perubahan besar dalam menjaga lingkungan.
-      </p>
+      <p>Bersiaplah untuk menjadikan pengolahan sampah sebagai momen yang lebih menyenangkan. Ayo mulai perjalanan hijau kita!</p>
       <a href="#cta-section" class="btn-mulai">Mulai</a>
     </div>
     <div class="hero-image">
@@ -352,128 +395,65 @@
     </div>
   </section>
 
-  <!-- Section Pencapaian -->
+  <!-- Pencapaian -->
   <section id="cta-section" class="pencapaian">
     <h2>PENCAPAIAN GREENOVATE</h2>
-    <p>
-      Teknologi Greenovate dirancang untuk memilah sampah berdasarkan jenisnya
-      melalui foto sampah yang diunggah, serta memberikan informasi tentang
-      kapasitas, dan jadwal TPS/TPA di kawasan Kampus Universitas Muhammdiyah
-      Semarang.
-    </p>
+    <p>Teknologi Greenovate dirancang untuk memilah sampah berdasarkan jenisnya...</p>
     <div class="stats">
-      <div class="card">
-        <h3>1jt Kg+</h3>
-        <p style="color: white">Sampah di Daur Ulang</p>
-      </div>
-      <div class="card">
-        <h3>50+</h3>
-        <p style="color: white">Penghargaan</p>
-      </div>
-      <div class="card">
-        <h3>5 Tempat</h3>
-        <p style="color: white">Lokasi TPS/TPA</p>
-      </div>
-      <div class="card">
-        <h3>300+</h3>
-        <p style="color: white">Pengguna</p>
-      </div>
+      <div class="card"><h3>1jt Kg+</h3><p>Sampah di Daur Ulang</p></div>
+      <div class="card"><h3>50+</h3><p>Penghargaan</p></div>
+      <div class="card"><h3>5 Tempat</h3><p>Lokasi TPS/TPA</p></div>
+      <div class="card"><h3>300+</h3><p>Pengguna</p></div>
     </div>
   </section>
 
-  <!-- FITUR SECTION -->
+  <!-- Fitur -->
   <section id="informasi-section" class="fitur">
     <h2>FITUR</h2>
-    <p>
-      Inovasi daur ulang Greenovate untuk kalangan Mahasiswa Universitas
-      Muhammadiyah Semarang.
-    </p>
+    <p>Inovasi daur ulang Greenovate untuk mahasiswa UNIMUS.</p>
     <div class="fitur-container">
-      <div class="fitur-item">
-        <img src="images/setor sampah.png" alt="Pendekteksi Sampah" />
-        <h4>PENDETEKSI SAMPAH</h4>
-        <p>
-          Bagikan foto sampah dari ulangmu ke Greenovate UNIMUS. AI kami akan
-          mengidentifikasi jenis sampah dan mendeteksinya.
-        </p>
-      </div>
-      <div class="fitur-item">
-        <img src="images/olah sampah.png" alt="TPST/TPA" />
-        <h4>TPST/TPA</h4>
-        <p>
-          Greenovate Unimus menyediakan informasi lokasi pengumpulan,
-          kapasitas, dan jadwal TPST/TPA di kawasan Kampus UNIMUS.
-        </p>
-      </div>
-      <div class="fitur-item">
-        <img src="images/pengepul.png" alt="Pickup" />
-        <h4>PICK UP</h4>
-        <p>Menawarkan penjemputan sampah praktis di wilayahmu.</p>
-      </div>
+      <div class="fitur-item"><img src="images/setor sampah.png"><h4>Pengetesan Sampah</h4></div>
+      <div class="fitur-item"><img src="images/olah sampah.png"><h4>TPST/TPA</h4></div>
+      <div class="fitur-item"><img src="images/pengepul.png"><h4>Pick Up</h4></div>
     </div>
   </section>
 
-  <!-- JENIS SAMPAH SECTION -->
-  <section id="informasi-section" class="jenis-sampah">
+  <!-- Jenis Sampah -->
+  <section class="jenis-sampah">
     <h2>JENIS SAMPAH</h2>
-    <p>
-      Berbagai jenis sampah yang dapat didaur ulang dan disetorkan kepada
-      Greenovate UNIMUS.
-    </p>
+    <p>Jenis sampah yang dapat didaur ulang dan disetorkan ke Greenovate UNIMUS.</p>
     <div class="jenis-grid">
-      <div class="jenis-item">
-        <img src="icon/kertas.png" /><span>Kertas</span>
-      </div>
-      <div class="jenis-item">
-        <img src="icon/plastik.png" /><span>Plastik</span>
-      </div>
-      <div class="jenis-item">
-        <img src="icon/kardus.png" /><span>Kardus</span>
-      </div>
-      <div class="jenis-item">
-        <img src="icon/kaca.png" /><span>Kaca</span>
-      </div>
-      <div class="jenis-item">
-        <img src="icon/logam.png" /><span>Logam</span>
-      </div>
-      <div class="jenis-item">
-        <img src="icon/organik.png" /><span>Organik</span>
-      </div>
-      <div class="jenis-item">
-        <img src="icon/lainnya.png" /><span>Lainnya</span>
-      </div>
+      <div class="jenis-item"><img src="icon/kertas.png"><span>Kertas</span></div>
+      <div class="jenis-item"><img src="icon/plastik.png"><span>Plastik</span></div>
+      <div class="jenis-item"><img src="icon/kardus.png"><span>Kardus</span></div>
+      <div class="jenis-item"><img src="icon/kaca.png"><span>Kaca</span></div>
+      <div class="jenis-item"><img src="icon/logam.png"><span>Logam</span></div>
+      <div class="jenis-item"><img src="icon/organik.png"><span>Organik</span></div>
+      <div class="jenis-item"><img src="icon/lainnya.png"><span>Lainnya</span></div>
     </div>
   </section>
 
-  <!-- GREENOVATE CTA SECTION -->
+  <!-- CTA -->
   <section id="layanan-section" class="greenovate-cta">
     <h2>GREENOVATE UNIMUS</h2>
-    <p>
-      Greenovate UNIMUS adalah platform yang memudahkan pemilihan sampah
-      dengan memberikan informasi layanan sampah yang tersedia sesuai dengan
-      alamat yang pengguna berikan.
-    </p>
-    <!-- Tombol Mulai di hero -->
+    <p>Platform untuk memudahkan pengelolaan sampah di lingkungan UNIMUS.</p>
     <a href="register.php" class="btn-cta">DAFTAR LAYANAN</a>
   </section>
 
+  <!-- Footer -->
   <footer class="footer">
     <div class="footer-container">
       <div class="footer-col">
         <h3>Greenovate UNIMUS</h3>
-        <p>
-          Berawal dari Pilah, Berakhir pada Kelestarian. Langkah kecil kita
-          dalam mendaur ulang dan bertanggung jawab atas sumber daya
-          memberikan dampak besar pada pelestarian lingkungan.
-        </p>
+        <p>Langkah kecil kita mendaur ulang memberikan dampak besar pada pelestarian lingkungan.</p>
         <p class="copyright">© 2024 Greenovate. All rights reserved</p>
       </div>
       <div class="footer-col">
-        <h4>Greenovate</h4>
+        <h4>Menu</h4>
         <ul>
-          <li><a href="hero-section">Home</a></li>
-          <li><a href="informasi-section">Informasi</a></li>
-          <li><a href="layanan-section">Layanan</a></li>
+          <li><a href="#hero-section">Home</a></li>
+          <li><a href="#informasi-section">Informasi</a></li>
+          <li><a href="#layanan-section">Layanan</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -492,5 +472,4 @@
     </div>
   </footer>
 </body>
-
 </html>
