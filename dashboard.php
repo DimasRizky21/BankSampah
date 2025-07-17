@@ -183,7 +183,7 @@
 
   <script>
     const userStr = localStorage.getItem("user");
-    if (!userStr) window.location.href = "index.html";
+    if (!userStr) window.location.href = "index.php";
 
     const user = JSON.parse(userStr);
     document.getElementById("username-display").innerText = "👤 Halo, " + user.username;
@@ -195,7 +195,7 @@
 
     function logout() {
       localStorage.clear();
-      window.location.href = "index.html";
+      window.location.href = "index.php";
     }
   </script>
 

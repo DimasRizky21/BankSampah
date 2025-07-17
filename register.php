@@ -107,7 +107,7 @@
         localStorage.setItem("users", JSON.stringify(users));
 
         alert("Pendaftaran berhasil! Silakan login.");
-        window.location.href = "login.html";
+        window.location.href = "login.php";
       }
     </script>
   </body>
