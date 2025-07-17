@@ -13,7 +13,7 @@
         <img src="images/login.png" alt="Ilustrasi Login" />
       </div>
       <div class="right">
-        <h2 class="title">Masuk.</h2>
+        <h2 class="title">Masuk</h2>
         <p class="subtitle">Masuk ke akun anda</p>
         <form onsubmit="login(event)">
           <label for="username">Username</label>
@@ -65,7 +65,7 @@
         localStorage.setItem("user", JSON.stringify(user));
 
         alert("Login berhasil!");
-        window.location.href = "dashboard.html";
+        window.location.href = "dashboard.php";
       }
     </script>
   </body>

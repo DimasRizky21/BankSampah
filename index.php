@@ -371,6 +371,7 @@
         <a href="#hero-section">Home</a>
         <a href="#informasi-section">Informasi</a>
         <a href="#layanan-section">Layanan</a>
+        <a href="edukasi.html">Edukasi</a>
       </nav>
       <!-- Dropdown login -->
       <div class="dropdown">
