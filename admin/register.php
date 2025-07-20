@@ -85,7 +85,7 @@ input:focus {
       <input type="password" id="password" placeholder="Password" />
       <button onclick="registerAdmin()">Daftar</button>
       <div class="link">
-        Sudah punya akun admin? <a href="admin-login.php">Login di sini</a>
+        Sudah punya akun admin? <a href="login.php">Login di sini</a>
       </div>
     </div>
   </div>
@@ -108,7 +108,7 @@ input:focus {
         admins[username] = password;
         localStorage.setItem("adminAccounts", JSON.stringify(admins));
         alert("Pendaftaran berhasil. Silakan login.");
-        window.location.href = "admin-login.php";
+        window.location.href = "login.php";
       }
     }
   </script>

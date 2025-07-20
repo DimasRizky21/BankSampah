@@ -110,82 +110,18 @@
   <aside class="sidebar">
     <h2>GreenOvate</h2>
     <nav>
-      <a onclick="showPage('dashboard')">Dashboard</a>
-      <a onclick="showPage('setor')">Setor</a>
-      <a onclick="showPage('redeem')">Redeem</a>
+    <a href="dashboard.php">Dashboard</a>
+      <a href="jenis_sampah.php">Daftar Sampah</a>
+      <a href="beli_sampah.php">Pembelian Sampah</a>
+      <a href="jual_sampah.php">Penjualan Sampah</a>
+      <a href="redeem.php">Redeem</a>
       <a href="logout.php">Logout</a>
     </nav>
   </aside>
 
   <main class="main">
-    <!-- Dashboard Page -->
-    <div id="dashboard" class="page">
-      <div class="header">
-        <h1>Overview</h1>
-      </div>
-
-      <div class="cards">
-        <div class="card">
-          <h3>Total Nasabah</h3>
-          <p id="total-nasabah">0</p>
-        </div>
-        <div class="card">
-          <h3>Total Setoran (Rp)</h3>
-          <p id="total-setor">0</p>
-        </div>
-        <div class="card">
-          <h3>Total Redeem (Rp)</h3>
-          <p id="total-redeem">0</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Setor Page -->
-    <div id="setor" class="page" style="display: none;">
-      <h2>Data Setor</h2>
-      <table>
-        <thead style="background-color: #c6f6d5;">
-          <tr>
-            <th>Nama Nasabah</th>
-            <th>Jenis Sampah</th>
-            <th>Berat (kg)</th>
-            <th>Harga per Kg (Rp)</th>
-            <th>Total (Rp)</th>
-            <th>Tanggal</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Budi Santoso</td>
-            <td>Plastik</td>
-            <td>3.5</td>
-            <td>1.000</td>
-            <td>3.500</td>
-            <td>2025-07-12</td>
-          </tr>
-          <tr>
-            <td>Ani Wulandari</td>
-            <td>Kertas</td>
-            <td>2.0</td>
-            <td>500</td>
-            <td>1.000</td>
-            <td>2025-07-12</td>
-          </tr>
-          <tr>
-            <td>Hasan Fadillah</td>
-            <td>Logam</td>
-            <td>1.5</td>
-            <td>2.000</td>
-            <td>3.000</td>
-            <td>2025-07-12</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-
     <!-- Redeem Page -->
-    <div id="redeem" class="page" style="display: none;">
+    <div id="redeem" class="page">
       <h2>Data Redeem</h2>
       <table>
         <thead style="background-color: #fed7d7;">
@@ -220,14 +156,6 @@
     </div>
 
   </main>
-
-  <script>
-    function showPage(id) {
-      const pages = document.querySelectorAll('.page');
-      pages.forEach(page => page.style.display = 'none');
-      document.getElementById(id).style.display = 'block';
-    }
-  </script>
 </body>
 
 </html>
