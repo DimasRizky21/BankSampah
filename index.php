@@ -373,14 +373,19 @@
         <a href="#layanan-section">Layanan</a>
         <a href="edukasi.html">Edukasi</a>
       </nav>
+
+      <button class="dropdown-toggle" onclick="window.location.href='login.php'">
+        MASUK
+      </button>
       <!-- Dropdown login -->
-      <div class="dropdown">
+
+      <!-- <div class="dropdown">
         <button class="dropdown-toggle">MASUK</button>
         <div class="dropdown-content">
           <a href="login.php">Masuk sebagai User</a>
           <a href="admin-login.php">Masuk sebagai Admin</a>
         </div>
-      </div>
+      </div> -->
     </div>
   </header>
 

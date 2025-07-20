@@ -14,101 +14,78 @@
       </div>
       <div class="right">
         <h2 class="title">Selamat Datang.</h2>
-        <form onsubmit="submitDaftar(event)">
+        <form method="POST" action="" id="registerForm">
           <label for="fullname">Nama Lengkap</label>
-          <input
-            type="text"
-            id="fullname"
-            placeholder="Nama Lengkap"
-            required
-          />
+          <input type="text" name="fullname" id="fullname" placeholder="Nama Lengkap" required />
 
           <label for="username">Username</label>
-          <input type="text" id="username" placeholder="Username" required />
+          <input type="text" name="username" id="username" placeholder="Username" required />
 
           <label for="email">Email</label>
-          <input type="email" id="email" placeholder="Email" required />
+          <input type="email" name="email" id="email" placeholder="Email" required />
+
+          <label for="nim">NIM</label>
+          <input type="text" name="nim" id="nim" placeholder="NIM" required />
 
           <label for="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            placeholder="Password"
-            required
-          />
+          <input type="password" name="password" id="password" placeholder="Password" required />
 
           <div class="checkbox-group">
-            <input type="checkbox" id="terms" />
-            <label for="terms"
-              >Saya setuju dengan Ketentuan Layanan dan Kebijakan Privasi
-              platform</label
-            >
+            <input type="checkbox" id="terms" required />
+            <label for="terms">
+              Saya setuju dengan Ketentuan Layanan dan Kebijakan Privasi platform
+            </label>
           </div>
 
           <button type="submit" class="btn-register">Daftar</button>
         </form>
         <div class="login-link">
-          Sudah punya akun? <a href="login.html">Masuk</a>
+          Sudah punya akun? <a href="login.php">Masuk</a>
         </div>
       </div>
     </div>
 
     <script>
-      function validateEmail(email) {
-        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return re.test(email);
-      }
+    document.getElementById('registerForm').addEventListener('submit', function(e) {
+        e.preventDefault();
 
-      function submitDaftar(event) {
-        event.preventDefault(); // Mencegah form reload
+        const fullname = document.getElementById('fullname').value.trim();
+        const username = document.getElementById('username').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const nim = document.getElementById('nim').value.trim();
+        const password = document.getElementById('password').value.trim();
+        const termsChecked = document.getElementById('terms').checked;
 
-        const fullname = document.getElementById("fullname").value.trim();
-        const username = document.getElementById("username").value.trim();
-        const email = document.getElementById("email").value.trim();
-        const password = document.getElementById("password").value.trim();
-        const termsChecked = document.getElementById("terms").checked;
-
-        if (!fullname || !username || !email || !password) {
-          alert("Harap isi semua kolom!");
-          return;
+        if (!fullname || !username || !email || !nim || !password) {
+            alert("Harap isi semua kolom!");
+            return;
         }
 
         if (!termsChecked) {
-          alert(
-            "Anda harus menyetujui Ketentuan Layanan dan Kebijakan Privasi!"
-          );
-          return;
+            alert("Anda harus menyetujui Ketentuan Layanan dan Kebijakan Privasi!");
+            return;
         }
 
-        if (!validateEmail(email)) {
-          alert("Format email tidak valid!");
-          return;
-        }
-
-        if (password.length < 6) {
-          alert("Password minimal 6 karakter!");
-          return;
-        }
-
-        const users = JSON.parse(localStorage.getItem("users")) || [];
-
-        const userExists = users.some(
-          (user) =>
-            user.username.toLowerCase() === username.toLowerCase() ||
-            user.email.toLowerCase() === email.toLowerCase()
-        );
-
-        if (userExists) {
-          alert("Username atau Email sudah terdaftar!");
-          return;
-        }
-
-        users.push({ fullname, username, email, password });
-        localStorage.setItem("users", JSON.stringify(users));
-
-        alert("Pendaftaran berhasil! Silakan login.");
-        window.location.href = "login.php";
-      }
+        fetch('proses_daftar.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: `fullname=${encodeURIComponent(fullname)}&username=${encodeURIComponent(username)}&email=${encodeURIComponent(email)}&nim=${encodeURIComponent(nim)}&password=${encodeURIComponent(password)}`
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                alert(data.message);
+                window.location.href = 'login.php';
+            } else {
+                alert(data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Terjadi kesalahan. Silakan coba lagi.');
+        });
+    });
     </script>
+
   </body>
 </html>

@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="id">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Greenovate Unimus</title>
+    <title>Login | Greenovate Unimus</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
@@ -14,13 +13,13 @@
       </div>
       <div class="right">
         <h2 class="title">Masuk</h2>
-        <p class="subtitle">Masuk ke akun anda</p>
-        <form onsubmit="login(event)">
+        <p class="subtitle">Masuk ke akun Anda</p>
+        <form id="loginForm">
           <label for="username">Username</label>
-          <input type="text" id="username" placeholder="Username" />
+          <input type="text" id="username" name="username" placeholder="Username" required />
 
           <label for="password">Password</label>
-          <input type="password" id="password" placeholder="********" />
+          <input type="password" id="password" name="password" placeholder="********" required />
 
           <div class="options">
             <label><input type="checkbox" /> Ingat akun</label>
@@ -30,43 +29,43 @@
           <button type="submit" class="btn-login">Masuk</button>
 
           <p class="register">
-            Belum punya akun? <a href="register.php">Daftar</a>
+            Belum punya akun? <a href="daftar.php">Daftar</a>
           </p>
         </form>
       </div>
     </div>
 
     <script>
-      function login(event) {
-        event.preventDefault(); // Mencegah reload saat submit form
+      document.getElementById('loginForm').addEventListener('submit', function(e) {
+        e.preventDefault();
 
-        const username = document.getElementById("username").value.trim();
-        const password = document.getElementById("password").value.trim();
+        const username = document.getElementById('username').value.trim();
+        const password = document.getElementById('password').value.trim();
 
         if (!username || !password) {
           alert("Harap masukkan username dan password!");
           return;
         }
 
-        const users = JSON.parse(localStorage.getItem("users")) || [];
-
-        const user = users.find(
-          (u) =>
-            u.username.toLowerCase() === username.toLowerCase() &&
-            u.password === password
-        );
-
-        if (!user) {
-          alert("Username atau password salah!");
-          return;
-        }
-
-        // Simpan data user aktif ke localStorage
-        localStorage.setItem("user", JSON.stringify(user));
-
-        alert("Login berhasil!");
-        window.location.href = "dashboard.php";
-      }
+        fetch('proses_login.php', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: `username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.status === 'success') {
+            alert(data.message);
+            window.location.href = 'dashboard.php';
+          } else {
+            alert(data.message);
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          alert('Terjadi kesalahan. Silakan coba lagi.');
+        });
+      });
     </script>
   </body>
 </html>
