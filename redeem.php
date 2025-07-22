@@ -1,8 +1,26 @@
+<?php
+include 'koneksi.php';
+session_start();
+
+include 'koneksi.php';
+
+if (!isset($_SESSION['user_id'])) {
+  header("Location: login.php");
+  exit;
+}
+
+$id = $_SESSION['user_id'];
+$result = mysqli_query($koneksi, "SELECT saldo FROM users WHERE id = '$id'");
+$data = mysqli_fetch_assoc($result);
+$saldo = $data['saldo'];
+?>
+
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Penarikan Saldo</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
   <style>
@@ -27,7 +45,7 @@
       background: white;
       padding: 30px 25px;
       border-radius: 15px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
       box-sizing: border-box;
     }
 
@@ -86,10 +104,11 @@
     button::before {
       content: '';
       position: absolute;
-      top: 0; left: 0;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(255,255,255,0.2);
+      background-color: rgba(255, 255, 255, 0.2);
       z-index: -1;
       transition: transform 0.3s ease;
       transform: scaleX(0);
@@ -102,7 +121,7 @@
 
     button:hover {
       transform: translateY(-2px);
-      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
     }
 
     .back-link {
@@ -119,6 +138,7 @@
     }
   </style>
 </head>
+
 <body>
   <header>
     <h1>Penarikan Saldo</h1>
@@ -126,27 +146,30 @@
 
   <main>
     <div class="saldo-box">
-      Saldo Anda: <span id="saldo">Rp 0</span>
+      <span id="saldo">Rp <?= number_format($saldo, 0, ',', '.') ?></span>
     </div>
 
     <label for="nominal">Masukkan Nominal Penarikan (Rp)</label>
-    <input type="number" id="nominal" placeholder="Contoh: 10000" min="1000" step="500"/>
+    <input type="number" id="nominal" placeholder="Contoh: 10000" min="1000" step="500" />
 
     <button onclick="ajukanPenarikan()">Ajukan Penarikan</button>
-    <a href="dashboard.html" class="back-link">← Kembali ke Dashboard</a>
+    <a href="dashboard.php" class="back-link">← Kembali ke Dashboard</a>
   </main>
 
   <script>
     const userStr = localStorage.getItem("user");
-    if (!userStr) window.location.href = "index.html";
+    if (!userStr) window.location.href = "index.php";
 
     const user = JSON.parse(userStr);
-    const saldo = parseInt(localStorage.getItem("saldo") || 0);
-    document.getElementById("saldo").innerText = "Rp " + saldo.toLocaleString();
+    // const saldo = user.saldo; // jika kamu ingin ambil dari localStorage dan manipulasi JS
 
     function ajukanPenarikan() {
       const nominal = parseInt(document.getElementById("nominal").value);
-      if (!nominal || nominal < 1000) {
+
+      const saldoText = document.getElementById("saldo").innerText.replace("Rp", "").replace(/\./g, "");
+      const saldo = parseInt(saldoText);
+
+      if (nominal < 1000) {
         alert("Nominal harus lebih dari Rp 1000");
         return;
       }
@@ -156,14 +179,17 @@
       }
 
       fetch("redeem_saldo.php", {
-        method: "POST",
-        headers: {"Content-Type": "application/x-www-form-urlencoded"},
-        body: `nim=${user.nim}&nominal=${nominal}`
-      })
-      .then(res => res.text())
-      .then(alert)
-      .then(() => location.href = "dashboard.html");
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+          },
+          body: `nim=${user.nim}&nominal=${nominal}`
+        })
+        .then(res => res.text())
+        .then(alert)
+        .then(() => location.href = "dashboard.php");
     }
   </script>
 </body>
+
 </html>
