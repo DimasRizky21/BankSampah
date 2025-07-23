@@ -1,38 +1,62 @@
 <?php
 include '../koneksi.php';
 
-// Ambil ID dari URL
-$id = $_GET['id'];
+if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
+    header("Location: beli_sampah.php");
+    exit;
+}
 
-// Ambil data pembelian berdasarkan ID
+$id = intval($_GET['id']);
+
+// Ambil data pembelian lama
 $query = "SELECT * FROM pembelian_sampah WHERE id = $id";
 $result = mysqli_query($koneksi, $query);
 $data = mysqli_fetch_assoc($result);
 
+if (!$data) {
+    echo "Data tidak ditemukan";
+    exit;
+}
+
 // Proses update jika form disubmit
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $nama_nasabah = $_POST['nama_nasabah'];
-    $jenis_sampah = $_POST['jenis_sampah'];
-    $berat = $_POST['berat'];
-    $harga_per_kg = $_POST['harga_per_kg'];
-    $total = $berat * $harga_per_kg;
+    $user_id = intval($_POST['user_id']);
+    $jenis_sampah_id = intval($_POST['jenis_sampah']);
+    $berat = floatval($_POST['berat']);
 
-    $query_update = "UPDATE pembelian_sampah 
-                     SET nama_nasabah='$nama_nasabah',
-                         jenis_sampah='$jenis_sampah',
-                         berat='$berat',
-                         harga_per_kg='$harga_per_kg',
-                         total='$total'
-                     WHERE id=$id";
-    mysqli_query($koneksi, $query_update);
+    // Ambil harga dan jenis dari tabel sampah
+    $sampah_q = mysqli_query($koneksi, "SELECT jenis_sampah, harga_per_kg FROM sampah WHERE id = '$jenis_sampah_id'");
+    $sampah = mysqli_fetch_assoc($sampah_q);
+    $jenis_sampah = $sampah['jenis_sampah'];
+    $harga_per_kg = $sampah['harga_per_kg'];
+
+    $total_baru = $berat * $harga_per_kg;
+    $selisih_total = $total_baru - $data['total'];
+
+    // Update saldo user
+    mysqli_query($koneksi, "UPDATE users SET saldo = saldo + $selisih_total WHERE id = $user_id");
+
+    // Update pembelian_sampah
+    $update = "UPDATE pembelian_sampah 
+               SET user_id = '$user_id',
+                   jenis_sampah = '$jenis_sampah',
+                   berat = '$berat',
+                   harga_per_kg = '$harga_per_kg',
+                   total = '$total_baru'
+               WHERE id = $id";
+    mysqli_query($koneksi, $update);
 
     header("Location: beli_sampah.php");
     exit;
 }
+
+// Ambil data user dan jenis sampah untuk dropdown
+$user_query = mysqli_query($koneksi, "SELECT id, fullname FROM users ORDER BY fullname ASC");
+$jenis_query = mysqli_query($koneksi, "SELECT id, jenis_sampah, harga_per_kg FROM sampah ORDER BY jenis_sampah ASC");
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -84,23 +108,33 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <div class="form-container">
       <h2>Edit Pembelian Sampah</h2>
       <form method="POST">
-        <label for="nama_nasabah">Nama Nasabah</label>
-        <input type="text" id="nama_nasabah" name="nama_nasabah" value="<?= $data['nama_nasabah']; ?>" required>
+        <label for="user_id">Nama Nasabah</label>
+        <select name="user_id" id="user_id" required>
+          <option value="" disabled selected>Pilih Nasabah</option>
+          <?php while ($user = mysqli_fetch_assoc($user_query)): ?>
+            <option value="<?= $user['id'] ?>" <?= ($user['id'] == $data['user_id']) ? 'selected' : '' ?>>
+              <?= htmlspecialchars($user['fullname']) ?>
+            </option>
+          <?php endwhile; ?>
+        </select>
 
         <label for="jenis_sampah">Jenis Sampah</label>
-        <select id="jenis_sampah" name="jenis_sampah" required>
-          <option value="Plastik" <?= ($data['jenis_sampah'] == 'Plastik') ? 'selected' : ''; ?>>Plastik</option>
-          <option value="Kertas" <?= ($data['jenis_sampah'] == 'Kertas') ? 'selected' : ''; ?>>Kertas</option>
-          <option value="Logam" <?= ($data['jenis_sampah'] == 'Logam') ? 'selected' : ''; ?>>Logam</option>
-          <option value="Kardus" <?= ($data['jenis_sampah'] == 'Kardus') ? 'selected' : ''; ?>>Kardus</option>
-          <option value="Kaca" <?= ($data['jenis_sampah'] == 'Kaca') ? 'selected' : ''; ?>>Kaca</option>
+        <select name="jenis_sampah" id="jenis_sampah" required>
+          <option value="" disabled selected>Pilih Jenis Sampah</option>
+          <?php mysqli_data_seek($jenis_query, 0); while ($jenis = mysqli_fetch_assoc($jenis_query)): ?>
+            <option value="<?= $jenis['id'] ?>" 
+              data-harga="<?= $jenis['harga_per_kg'] ?>" 
+              <?= ($jenis['jenis_sampah'] == $data['jenis_sampah']) ? 'selected' : '' ?>>
+              <?= $jenis['jenis_sampah'] ?> - Rp <?= number_format($jenis['harga_per_kg'], 0, ',', '.') ?>/kg
+            </option>
+          <?php endwhile; ?>
         </select>
 
         <label for="berat">Berat (kg)</label>
-        <input type="number" step="0.01" id="berat" name="berat" value="<?= $data['berat']; ?>" required>
+        <input type="number" step="0.01" id="berat" name="berat" value="<?= $data['berat'] ?>" required>
 
-        <label for="harga_per_kg">Harga per Kg (Rp)</label>
-        <input type="number" id="harga_per_kg" name="harga_per_kg" value="<?= $data['harga_per_kg']; ?>" required>
+        <label for="saldo_diterima">Saldo yang diterima (Rp)</label>
+        <input type="text" id="saldo_diterima" name="saldo_diterima" disabled>
 
         <div class="button-group">
           <a href="beli_sampah.php" class="btn btn-back">Kembali</a>
@@ -109,5 +143,30 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       </form>
     </div>
   </main>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+      const jenisSelect = document.getElementById('jenis_sampah');
+      const beratInput = document.getElementById('berat');
+      const saldoInput = document.getElementById('saldo_diterima');
+
+      function hitungSaldo() {
+          const selectedOption = jenisSelect.options[jenisSelect.selectedIndex];
+          const hargaPerKg = parseFloat(selectedOption.getAttribute('data-harga'));
+          const berat = parseFloat(beratInput.value);
+
+          if (!isNaN(hargaPerKg) && !isNaN(berat)) {
+              const total = hargaPerKg * berat;
+              saldoInput.value = new Intl.NumberFormat('id-ID').format(total);
+          } else {
+              saldoInput.value = '';
+          }
+      }
+
+      jenisSelect.addEventListener('change', hitungSaldo);
+      beratInput.addEventListener('input', hitungSaldo);
+      hitungSaldo(); // jalankan di awal
+  });
+  </script>
 </body>
 </html>

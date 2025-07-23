@@ -1,8 +1,8 @@
 <?php
 session_start();
-$host = "localhost:3307";
+$host = "localhost";
 $user = "root";
-$pass = "";
+$pass = "root";
 $db   = "banksampah";
 
 // Koneksi ke database

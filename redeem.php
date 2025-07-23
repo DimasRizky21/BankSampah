@@ -157,8 +157,6 @@ $saldo = $data['saldo'];
   </main>
 
   <script>
-    const userStr = localStorage.getItem("user");
-    if (!userStr) window.location.href = "index.php";
 
     const user = JSON.parse(userStr);
     // const saldo = user.saldo; // jika kamu ingin ambil dari localStorage dan manipulasi JS
