@@ -170,18 +170,19 @@ $saldo = $data['saldo'];
         return;
       }
 
-      fetch("redeem.php", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded"
-          },
-          body: `nominal=${nominal}`
-        })
-        .then(res => res.text())
-        .then(alert)
-        .then(() => location.href = "dashboard.php");
+      fetch("redeem_handler.php", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: `nominal=${nominal}`
+      })
+      .then(res => res.text())
+      .then(alert)
+      .then(() => location.href = "dashboard.php");
     }
   </script>
+
 </body>
 
 </html>

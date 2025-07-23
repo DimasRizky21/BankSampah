@@ -1,3 +1,17 @@
+<?php
+include '../koneksi.php';
+session_start();
+
+
+// Ambil data dari redeem_request JOIN users
+$query = mysqli_query($koneksi, "
+    SELECT rr.id, rr.nominal, rr.tanggal_permintaan, rr.status, u.fullname 
+    FROM redeem_request rr 
+    JOIN users u ON rr.user_id = u.id
+    ORDER BY rr.tanggal_permintaan DESC
+");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -130,27 +144,28 @@
             <th>Nominal (Rp)</th>
             <th>Tanggal</th>
             <th>Status</th>
+            <th>Aksi</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Rina Kartika</td>
-            <td>50.000</td>
-            <td>2025-07-11</td>
-            <td>Diterima</td>
-          </tr>
-          <tr>
-            <td>Dedi Maulana</td>
-            <td>75.000</td>
-            <td>2025-07-10</td>
-            <td>Diproses</td>
-          </tr>
-          <tr>
-            <td>Sri Wahyuni</td>
-            <td>100.000</td>
-            <td>2025-07-09</td>
-            <td>Diterima</td>
-          </tr>
+          <?php while ($row = mysqli_fetch_assoc($query)): ?>
+              <tr>
+                <td><?= htmlspecialchars($row['fullname']) ?></td>
+                <td><?= number_format($row['nominal'], 0, ',', '.') ?></td>
+                <td><?= date('Y-m-d H:i', strtotime($row['tanggal_permintaan'])) ?></td>
+                <td><?= htmlspecialchars($row['status']) ?></td>
+                <td>
+                  <?php if ($row['status'] == 'Diproses'): ?>
+                    <form method="POST" action="proses_redeem.php" onsubmit="return confirm('Terima permintaan ini?')">
+                      <input type="hidden" name="id" value="<?= htmlspecialchars($row['id']) ?>">
+                      <button type="submit" name="terima">Terima</button>
+                    </form>
+                  <?php else: ?>
+                     -
+                  <?php endif; ?>
+                </td>
+              </tr>
+          <?php endwhile; ?>
         </tbody>
       </table>
     </div>

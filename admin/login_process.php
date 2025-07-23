@@ -1,6 +1,6 @@
 <?php
 session_start();
-$host = "localhost:3307";
+$host = "localhost";
 $user = "root";
 $pass = "";
 $db   = "banksampah";
