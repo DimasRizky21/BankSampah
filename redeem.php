@@ -2,8 +2,6 @@
 include 'koneksi.php';
 session_start();
 
-include 'koneksi.php';
-
 if (!isset($_SESSION['user_id'])) {
   header("Location: login.php");
   exit;
@@ -157,10 +155,6 @@ $saldo = $data['saldo'];
   </main>
 
   <script>
-
-    const user = JSON.parse(userStr);
-    // const saldo = user.saldo; // jika kamu ingin ambil dari localStorage dan manipulasi JS
-
     function ajukanPenarikan() {
       const nominal = parseInt(document.getElementById("nominal").value);
 
@@ -176,12 +170,12 @@ $saldo = $data['saldo'];
         return;
       }
 
-      fetch("redeem_saldo.php", {
+      fetch("redeem.php", {
           method: "POST",
           headers: {
             "Content-Type": "application/x-www-form-urlencoded"
           },
-          body: `nim=${user.nim}&nominal=${nominal}`
+          body: `nominal=${nominal}`
         })
         .then(res => res.text())
         .then(alert)

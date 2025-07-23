@@ -59,7 +59,6 @@ $saldo = number_format($user['saldo'], 0, ',', '.');
       </div>
 
       <div class="button-group">
-        <button class="button setor" onclick="window.location.href='setor.php'">Setor Sampah</button>
         <button class="button redeem" onclick="window.location.href='redeem.php'">Redeem Hadiah</button>
       </div>
     </div>
