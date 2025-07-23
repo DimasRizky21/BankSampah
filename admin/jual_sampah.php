@@ -1,3 +1,7 @@
+<?php
+include '../koneksi.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -103,6 +107,16 @@
       padding: 10px;
       border: 1px solid #ccc;
     }
+
+    a.btn-tambah {
+      display: inline-block;
+      padding: 10px 15px;
+      background: #166534;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      margin-bottom: 15px;
+    }
   </style>
 </head>
 
@@ -121,12 +135,13 @@
 
   <main class="main">
     <!-- Setor Page -->
-    <div id="setor" class="page" >
+    <div id="setor" class="page">
       <h2>Data Setor</h2>
+      <a href="tambah_jual_sampah.php" class="btn-tambah">+ Tambah</a>
       <table>
         <thead style="background-color: #c6f6d5;">
           <tr>
-            <th>Nama Nasabah</th>
+            <th>Nama Mitra</th>
             <th>Jenis Sampah</th>
             <th>Berat (kg)</th>
             <th>Harga per Kg (Rp)</th>
@@ -135,30 +150,28 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Budi Santoso</td>
-            <td>Plastik</td>
-            <td>3.5</td>
-            <td>1.000</td>
-            <td>3.500</td>
-            <td>2025-07-12</td>
-          </tr>
-          <tr>
-            <td>Ani Wulandari</td>
-            <td>Kertas</td>
-            <td>2.0</td>
-            <td>500</td>
-            <td>1.000</td>
-            <td>2025-07-12</td>
-          </tr>
-          <tr>
-            <td>Hasan Fadillah</td>
-            <td>Logam</td>
-            <td>1.5</td>
-            <td>2.000</td>
-            <td>3.000</td>
-            <td>2025-07-12</td>
-          </tr>
+          <?php
+          $no = 1;
+
+          // Pakai JOIN ambil nama user
+          $query = "
+          SELECT * FROM `penjualan_sampah`
+        ";
+          $result = mysqli_query($koneksi, $query);
+
+          while ($row = mysqli_fetch_assoc($result)) {
+            echo "<tr>
+              <td>{$no}</td>
+              <td>{$row['nama_mitra']}</td>
+              <td>{$row['jenis_sampah']}</td>
+              <td>{$row['berat_kg']}</td>
+              <td>" . number_format($row['harga_per_kg'], 0, ',', '.') . "</td>
+              <td>" . number_format($row['total'], 0, ',', '.') . "</td>
+              <td>{$row['tanggal']}</td>
+            </tr>";
+            $no++;
+          }
+          ?>
         </tbody>
       </table>
     </div>
