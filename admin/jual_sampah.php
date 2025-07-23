@@ -10,6 +10,7 @@ include '../koneksi.php';
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GreenOvate Admin Dashboard</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
     * {
       box-sizing: border-box;
@@ -117,6 +118,12 @@ include '../koneksi.php';
       border-radius: 5px;
       margin-bottom: 15px;
     }
+
+    .btn-edit, .btn-hapus {
+      padding: 5px 8px; color: white; text-decoration: none; border-radius: 5px; font-size: 14px;
+    }
+    .btn-edit { background: #1b7c4d; margin-right: 5px; }
+    .btn-hapus { background: red; }
   </style>
 </head>
 
@@ -148,6 +155,7 @@ include '../koneksi.php';
             <th>Harga per Kg (Rp)</th>
             <th>Total (Rp)</th>
             <th>Tanggal</th>
+            <th>Aksi</th>
           </tr>
         </thead>
         <tbody>
@@ -169,6 +177,10 @@ include '../koneksi.php';
               <td>" . number_format($row['harga_per_kg'], 0, ',', '.') . "</td>
               <td>" . number_format($row['total'], 0, ',', '.') . "</td>
               <td>{$row['tanggal']}</td>
+              <td>
+                <a href='edit_jual_sampah.php?id={$row['id']}' class='btn-edit' title='Edit'><i class='fas fa-pen'></i></a>
+                <a href='hapus_jual_sampah.php?id={$row['id']}' class='btn-hapus' title='Hapus' onclick=\"return confirm('Yakin ingin menghapus data ini?');\"><i class='fas fa-trash'></i></a>
+              </td>
             </tr>";
             $no++;
           }
