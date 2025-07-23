@@ -141,6 +141,7 @@ include '../koneksi.php';
       <table>
         <thead style="background-color: #c6f6d5;">
           <tr>
+            <th>No</th>
             <th>Nama Mitra</th>
             <th>Jenis Sampah</th>
             <th>Berat (kg)</th>
