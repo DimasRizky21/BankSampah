@@ -1,5 +1,11 @@
 <?php
 include '../koneksi.php';
+session_start();
+
+if (!isset($_SESSION['admin'])) {
+  header("Location: login.php"); 
+  exit;
+}
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $kategori_id = $_POST['kategori_id'];

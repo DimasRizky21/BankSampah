@@ -1,5 +1,11 @@
 <?php
 include '../koneksi.php';
+session_start();
+
+if (!isset($_SESSION['admin'])) {
+  header("Location: login.php"); 
+  exit;
+}
 
 if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
     header("Location: jenis_sampah.php");

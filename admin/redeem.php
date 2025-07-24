@@ -2,6 +2,11 @@
 include '../koneksi.php';
 session_start();
 
+if (!isset($_SESSION['admin'])) {
+  header("Location: login.php"); 
+  exit;
+}
+
 // Ambil data dari redeem_request JOIN users
 $query = mysqli_query($koneksi, "
     SELECT rr.id, rr.nominal, rr.tanggal_permintaan, rr.status, u.fullname 

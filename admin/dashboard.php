@@ -2,6 +2,12 @@
 include '../koneksi.php';
 session_start();
 
+if (!isset($_SESSION['admin'])) {
+  header("Location: login.php"); 
+  exit;
+}
+
+
 // Ambil total user
 $result_user = mysqli_query($koneksi, "SELECT COUNT(*) AS total_user FROM users");
 $total_user = mysqli_fetch_assoc($result_user)['total_user'];

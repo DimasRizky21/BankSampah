@@ -1,5 +1,11 @@
 <?php
 include '../koneksi.php';
+session_start();
+
+if (!isset($_SESSION['admin'])) {
+  header("Location: login.php"); 
+  exit;
+}
 
 // Ambil ID dari URL
 $id = intval($_GET['id']);
