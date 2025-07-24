@@ -1,6 +1,8 @@
 <?php
 include '../koneksi.php';
 session_start();
+header("Cache-Control: no-cache, must-revalidate");
+header("Expires: Sat, 1 Jul 2000 05:00:00 GMT");
 
 if (!isset($_SESSION['admin'])) {
   header("Location: login.php"); 
@@ -111,15 +113,25 @@ while ($row = mysqli_fetch_assoc($result)) {
       font-weight: bold;
     }
     .chart-container {
-  width: 100%;
-  max-width: 500px; /* Batas lebar maksimum */
-  height: 300px;     /* Tinggi tetap agar tidak terlalu besar */
-  margin: 0 auto;    /* Tengah halaman */
-}
+      width: 100%;
+      max-width: 500px; /* Batas lebar maksimum */
+      height: 300px;     /* Tinggi tetap agar tidak terlalu besar */
+      margin: 0 auto;    /* Tengah halaman */
+    }
     canvas {
       width: 100% !important;
       height: auto !important;
     }
+    <script>
+      window.onload = function() {
+        if (!navigator.onLine) return; // jika offline abaikan
+
+        // Paksa reload untuk mengambil status session terbaru
+        if (performance.navigation.type === 2) {
+         location.reload(true);
+        }
+      };
+    </script>
   </style>
 </head>
 
