@@ -2,7 +2,6 @@
 include '../koneksi.php';
 session_start();
 
-
 // Ambil data dari redeem_request JOIN users
 $query = mysqli_query($koneksi, "
     SELECT rr.id, rr.nominal, rr.tanggal_permintaan, rr.status, u.fullname 
@@ -20,6 +19,7 @@ $query = mysqli_query($koneksi, "
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GreenOvate Admin Dashboard</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
     * {
       box-sizing: border-box;
@@ -116,6 +116,24 @@ $query = mysqli_query($koneksi, "
     td {
       padding: 10px;
       border: 1px solid #ccc;
+      text-align: center;
+    }
+
+    /* Tombol Terima */
+    button.accept-btn {
+      background-color: #38a169;
+      color: white;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 14px;
+      transition: background-color 0.3s ease;
+    }
+
+    button.accept-btn:hover {
+      background-color: #2f855a;
     }
   </style>
 </head>
@@ -124,7 +142,7 @@ $query = mysqli_query($koneksi, "
   <aside class="sidebar">
     <h2>GreenOvate</h2>
     <nav>
-    <a href="dashboard.php">Dashboard</a>
+      <a href="dashboard.php">Dashboard</a>
       <a href="jenis_sampah.php">Daftar Sampah</a>
       <a href="beli_sampah.php">Pembelian Sampah</a>
       <a href="jual_sampah.php">Penjualan Sampah</a>
@@ -134,7 +152,6 @@ $query = mysqli_query($koneksi, "
   </aside>
 
   <main class="main">
-    <!-- Redeem Page -->
     <div id="redeem" class="page">
       <h2>Data Redeem</h2>
       <table>
@@ -149,27 +166,28 @@ $query = mysqli_query($koneksi, "
         </thead>
         <tbody>
           <?php while ($row = mysqli_fetch_assoc($query)): ?>
-              <tr>
-                <td><?= htmlspecialchars($row['fullname']) ?></td>
-                <td><?= number_format($row['nominal'], 0, ',', '.') ?></td>
-                <td><?= date('Y-m-d H:i', strtotime($row['tanggal_permintaan'])) ?></td>
-                <td><?= htmlspecialchars($row['status']) ?></td>
-                <td>
-                  <?php if ($row['status'] == 'Diproses'): ?>
-                    <form method="POST" action="proses_redeem.php" onsubmit="return confirm('Terima permintaan ini?')">
-                      <input type="hidden" name="id" value="<?= htmlspecialchars($row['id']) ?>">
-                      <button type="submit" name="terima">Terima</button>
-                    </form>
-                  <?php else: ?>
-                     -
-                  <?php endif; ?>
-                </td>
-              </tr>
+            <tr>
+              <td><?= htmlspecialchars($row['fullname']) ?></td>
+              <td><?= number_format($row['nominal'], 0, ',', '.') ?></td>
+              <td><?= date('Y-m-d H:i', strtotime($row['tanggal_permintaan'])) ?></td>
+              <td><?= htmlspecialchars($row['status']) ?></td>
+              <td>
+                <?php if ($row['status'] == 'Diproses'): ?>
+                  <form method="POST" action="proses_redeem.php" onsubmit="return confirm('Terima permintaan ini?')">
+                    <input type="hidden" name="id" value="<?= htmlspecialchars($row['id']) ?>">
+                    <button type="submit" name="terima" class="accept-btn">
+                      <i class="fas fa-check"></i> Terima
+                    </button>
+                  </form>
+                <?php else: ?>
+                  -
+                <?php endif; ?>
+              </td>
+            </tr>
           <?php endwhile; ?>
         </tbody>
       </table>
     </div>
-
   </main>
 </body>
 
