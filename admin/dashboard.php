@@ -1,3 +1,20 @@
+<?php
+include '../koneksi.php';
+session_start();
+
+// Ambil total user
+$result_user = mysqli_query($koneksi, "SELECT COUNT(*) AS total_user FROM users");
+$total_user = mysqli_fetch_assoc($result_user)['total_user'];
+
+// Ambil total setoran
+$result_setor = mysqli_query($koneksi, "SELECT SUM(total) AS total_setor FROM pembelian_sampah");
+$total_setor = mysqli_fetch_assoc($result_setor)['total_setor'] ?? 0;
+
+// Ambil total redeem
+$result_redeem = mysqli_query($koneksi, "SELECT SUM(nominal) AS total_redeem FROM redeem_request WHERE status = 'Diterima'");
+$total_redeem = mysqli_fetch_assoc($result_redeem)['total_redeem'] ?? 0;
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -78,30 +95,13 @@
       color: #1c4532;
     }
 
-    .chart,
-    .transactions {
-      background: #fff;
-      padding: 20px;
-      border-radius: 15px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-      margin-bottom: 30px;
+    .card h3 {
+      margin-bottom: 10px;
     }
 
-    .transactions h3,
-    .chart h3 {
-      margin-bottom: 15px;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 10px;
-    }
-
-    th,
-    td {
-      padding: 10px;
-      border: 1px solid #ccc;
+    .card p {
+      font-size: 24px;
+      font-weight: bold;
     }
   </style>
 </head>
@@ -129,27 +129,19 @@
       <div class="cards">
         <div class="card">
           <h3>Total Nasabah</h3>
-          <p id="total-nasabah">0</p>
+          <p><?= $total_user ?></p>
         </div>
         <div class="card">
           <h3>Total Setoran (Rp)</h3>
-          <p id="total-setor">0</p>
+          <p><?= number_format($total_setor, 0, ',', '.') ?></p>
         </div>
         <div class="card">
           <h3>Total Redeem (Rp)</h3>
-          <p id="total-redeem">0</p>
+          <p><?= number_format($total_redeem, 0, ',', '.') ?></p>
         </div>
       </div>
     </div>
   </main>
-
-  <script>
-    function showPage(id) {
-      const pages = document.querySelectorAll('.page');
-      pages.forEach(page => page.style.display = 'none');
-      document.getElementById(id).style.display = 'block';
-    }
-  </script>
 </body>
 
 </html>
