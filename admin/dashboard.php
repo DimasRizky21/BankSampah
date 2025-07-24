@@ -13,30 +13,40 @@ $total_setor = mysqli_fetch_assoc($result_setor)['total_setor'] ?? 0;
 // Ambil total redeem
 $result_redeem = mysqli_query($koneksi, "SELECT SUM(nominal) AS total_redeem FROM redeem_request WHERE status = 'Diterima'");
 $total_redeem = mysqli_fetch_assoc($result_redeem)['total_redeem'] ?? 0;
+
+// Ambil data komposisi sampah
+$query = "SELECT jenis_sampah, SUM(berat) as total_berat FROM pembelian_sampah GROUP BY jenis_sampah";
+$result = mysqli_query($koneksi, $query);
+
+$labels = [];
+$data = [];
+
+while ($row = mysqli_fetch_assoc($result)) {
+    $labels[] = $row['jenis_sampah'];
+    $data[] = $row['total_berat'];
+}
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="id">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GreenOvate Admin Dashboard</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
-
     body {
       font-family: 'Montserrat', sans-serif;
       background-color: #f5fafd;
       color: #1a1a1a;
       display: flex;
     }
-
     .sidebar {
       width: 220px;
       background-color: #166534;
@@ -45,12 +55,10 @@ $total_redeem = mysqli_fetch_assoc($result_redeem)['total_redeem'] ?? 0;
       height: 100vh;
       color: #ffffff;
     }
-
     .sidebar h2 {
       font-size: 22px;
       margin-bottom: 20px;
     }
-
     .sidebar nav a {
       display: block;
       padding: 12px;
@@ -61,30 +69,25 @@ $total_redeem = mysqli_fetch_assoc($result_redeem)['total_redeem'] ?? 0;
       transition: 0.3s;
       cursor: pointer;
     }
-
     .sidebar nav a:hover {
       background-color: #1b7c4d;
     }
-
     .main {
       flex: 1;
       padding: 30px;
       background-color: #f0fdf4;
     }
-
     .header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 30px;
     }
-
     .cards {
       display: flex;
       gap: 20px;
       margin-bottom: 30px;
     }
-
     .card {
       background: linear-gradient(135deg, #c6f6d5, #9ae6b4);
       border-radius: 15px;
@@ -94,14 +97,22 @@ $total_redeem = mysqli_fetch_assoc($result_redeem)['total_redeem'] ?? 0;
       text-align: center;
       color: #1c4532;
     }
-
     .card h3 {
       margin-bottom: 10px;
     }
-
     .card p {
       font-size: 24px;
       font-weight: bold;
+    }
+    .chart-container {
+  width: 100%;
+  max-width: 500px; /* Batas lebar maksimum */
+  height: 300px;     /* Tinggi tetap agar tidak terlalu besar */
+  margin: 0 auto;    /* Tengah halaman */
+}
+    canvas {
+      width: 100% !important;
+      height: auto !important;
     }
   </style>
 </head>
@@ -120,7 +131,6 @@ $total_redeem = mysqli_fetch_assoc($result_redeem)['total_redeem'] ?? 0;
   </aside>
 
   <main class="main">
-    <!-- Dashboard Page -->
     <div id="dashboard" class="page">
       <div class="header">
         <h1>Overview</h1>
@@ -140,8 +150,84 @@ $total_redeem = mysqli_fetch_assoc($result_redeem)['total_redeem'] ?? 0;
           <p><?= number_format($total_redeem, 0, ',', '.') ?></p>
         </div>
       </div>
+
+      <!-- Doughnut Chart -->
+      <div class="chart-container">
+        <h2>Komposisi Sampah Berdasarkan Jenis</h2>
+        <canvas id="sampahChart"></canvas>
+      </div>
     </div>
   </main>
-</body>
 
+  <script>
+    const ctx = document.getElementById('sampahChart').getContext('2d');
+    const sampahChart = new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+        labels: <?= json_encode($labels); ?>,
+        datasets: [{
+          label: 'Berat Sampah (kg)',
+          data: <?= json_encode($data); ?>,
+          backgroundColor: [
+            '#4CAF50',
+            '#FF9800',
+            '#03A9F4',
+            '#E91E63',
+            '#9C27B0',
+            '#FFC107',
+            '#00BCD4',
+            '#8BC34A',
+            '#CDDC39',
+            '#FF5722'
+          ],
+          borderColor: '#ffffff',
+          borderWidth: 2
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: true,
+        aspectRatio: 2,
+        plugins: {
+          legend: {
+            position: 'right',
+            labels: {
+              generateLabels: function(chart) {
+                const data = chart.data;
+                const dataset = data.datasets[0];
+                const total = dataset.data.reduce((sum, val) => sum + Number(val), 0);
+                return data.labels.map((label, i) => {
+                  const value = dataset.data[i];
+                  const percent = total > 0 ? ((value / total) * 100).toFixed(1) : 0;
+                  return {
+                    text: `${label} - ${percent}%`,
+                    fillStyle: dataset.backgroundColor[i],
+                    strokeStyle: dataset.borderColor,
+                    lineWidth: dataset.borderWidth,
+                    hidden: chart.getDatasetMeta(0).data[i].hidden,
+                    index: i
+                  };
+                });
+              },
+              boxWidth: 20,
+              padding: 15
+            }
+          },
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                const data = context.dataset.data;
+                const total = data.reduce((sum, val) => sum + Number(val), 0);
+                const value = context.parsed;
+                const percent = total > 0 ? ((value / total) * 100).toFixed(1) : 0;
+                return `${context.label} - ${value} kg (${percent}%)`;
+              }
+            }
+          }
+        }
+      }
+
+    });
+  </script>
+</body>
 </html>
