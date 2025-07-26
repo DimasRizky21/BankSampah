@@ -1,3 +1,13 @@
+<?php
+include 'koneksi.php';
+
+$query = "SELECT COUNT(*) AS total_user FROM users";
+$result = mysqli_query($koneksi, $query);
+$data = mysqli_fetch_assoc($result);
+$total_user = $data['total_user'];
+?>
+
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -409,7 +419,7 @@
       <div class="card"><h3>1jt Kg+</h3><p>Sampah di Daur Ulang</p></div>
       <div class="card"><h3>50+</h3><p>Penghargaan</p></div>
       <div class="card"><h3>5 Tempat</h3><p>Lokasi TPS/TPA</p></div>
-      <div class="card"><h3>300+</h3><p>Pengguna</p></div>
+      <div class="card"><h3><?php echo $total_user; ?></h3><p>Pengguna</p></div>
     </div>
   </section>
 
