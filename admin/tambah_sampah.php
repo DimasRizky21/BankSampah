@@ -16,8 +16,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $result = mysqli_query($koneksi, $query);
 
     if ($result) {
-        header("Location: jenis_sampah.php");
-        exit();
+      $_SESSION['success'] = "Data berhasil ditambahkan!";
+      header("Location: jenis_sampah.php");
+      exit();
     } else {
         echo "Gagal menambahkan data: " . mysqli_error($koneksi);
     }

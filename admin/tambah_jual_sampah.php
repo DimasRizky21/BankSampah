@@ -25,6 +25,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   mysqli_query($koneksi, "INSERT INTO penjualan_sampah (nama_mitra, jenis_sampah, berat_kg, harga_per_kg, total, tanggal)
     VALUES ('$nama_mitra', '$jenis_sampah', '$berat', '$harga_per_kg', '$total', '$tanggal')");
 
+  // Set session success
+  $_SESSION['success'] = "Penjualan sampah berhasil disimpan!";
   header("Location: jual_sampah.php");
   exit;
 }

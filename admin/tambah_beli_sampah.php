@@ -28,6 +28,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Update saldo user
     mysqli_query($koneksi, "UPDATE users SET saldo = saldo + '$total' WHERE id = '$user_id'");
 
+    // Set session success
+    $_SESSION['success'] = "Pembelian sampah berhasil disimpan!";
     header("Location: beli_sampah.php");
     exit;
 }
@@ -35,6 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 // Ambil user dan jenis sampah untuk dropdown
 $user_query = mysqli_query($koneksi, "SELECT id, fullname FROM users ORDER BY fullname ASC");
 $jenis_query = mysqli_query($koneksi, "SELECT id, jenis_sampah, harga_per_kg FROM sampah ORDER BY jenis_sampah ASC");
+
 ?>
 
 <!DOCTYPE html>

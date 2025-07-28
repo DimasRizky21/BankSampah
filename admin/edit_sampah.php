@@ -39,7 +39,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     ";
 
     if (mysqli_query($koneksi, $update)) {
-        header("Location: jenis_sampah.php?status=sukses_edit");
+        $_SESSION['success'] = "Data berhasil diperbarui!";
+        header("Location: jenis_sampah.php");
         exit;
     } else {
         echo "Gagal mengubah data: " . mysqli_error($koneksi);

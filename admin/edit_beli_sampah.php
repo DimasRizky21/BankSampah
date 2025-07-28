@@ -52,7 +52,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                WHERE id = $id";
     mysqli_query($koneksi, $update);
 
-    header("Location: beli_sampah.php");
+    $_SESSION['success'] = "Data pembelian berhasil diperbarui!";
+    header("Location: beli_sampah.php"); // Redirect ke halaman list (bisa juga balik ke edit kalau mau)
     exit;
 }
 

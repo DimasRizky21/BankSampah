@@ -14,7 +14,8 @@ if (isset($_GET['id'])) {
     $result = mysqli_query($koneksi, $query);
 
     if ($result) {
-        header("Location: jual_sampah.php?status=sukses_hapus");
+        $_SESSION['success'] = "Data berhasil dihapus!"; // ✅ Tambahkan ini
+        header("Location: jual_sampah.php");
         exit();
     } else {
         echo "Gagal menghapus data: " . mysqli_error($koneksi);

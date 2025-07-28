@@ -2,7 +2,7 @@
 session_start();
 $host = "localhost";
 $user = "root";
-$pass = "root";
+$pass = "";
 $db   = "banksampah";
 
 // Koneksi ke database

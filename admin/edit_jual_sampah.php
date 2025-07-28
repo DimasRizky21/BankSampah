@@ -42,7 +42,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         WHERE id = '$id'
     ");
 
-    header("Location: jual_sampah.php");
+    $_SESSION['success'] = "Data penjualan berhasil diperbarui!";
+    header("Location: jual_sampah.php"); // Redirect ke halaman list (bisa juga balik ke edit kalau mau)
     exit;
 }
 ?>
