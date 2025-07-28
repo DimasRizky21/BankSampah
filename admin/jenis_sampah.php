@@ -41,6 +41,7 @@ if (isset($_SESSION['success'])) {
       background-color: #f5fafd;
       color: #1a1a1a;
       display: flex;
+      overflow: hidden;
     }
 
     .sidebar {
@@ -51,12 +52,10 @@ if (isset($_SESSION['success'])) {
       height: 100vh;
       color: #ffffff;
     }
-
     .sidebar h2 {
       font-size: 22px;
       margin-bottom: 20px;
     }
-
     .sidebar nav a {
       display: block;
       padding: 12px;
@@ -67,7 +66,6 @@ if (isset($_SESSION['success'])) {
       transition: 0.3s;
       cursor: pointer;
     }
-
     .sidebar nav a:hover {
       background-color: #1b7c4d;
     }
@@ -76,6 +74,8 @@ if (isset($_SESSION['success'])) {
       flex: 1;
       padding: 30px;
       background-color: #f0fdf4;
+      height: 100vh;           /* Tinggi penuh layar */
+      overflow-y: auto;        /* Scroll hanya di main */
     }
 
     .header {
@@ -115,6 +115,20 @@ if (isset($_SESSION['success'])) {
       margin-bottom: 15px;
     }
 
+    .card p {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .sticky-header {
+      position: sticky;
+      top: 0;
+      background-color: #f0fdf4; /* Warna background yang sama dengan .main */
+      z-index: 10;
+      padding-bottom: 10px;
+      padding-top: 10px;
+    }
+
     table {
       width: 100%;
       border-collapse: collapse;
@@ -133,15 +147,16 @@ if (isset($_SESSION['success'])) {
 </head>
 
 <body>
-  <aside class="sidebar">
-    <h2>Greenovate</h2>
+<aside class="sidebar">
+    <h2>GreenOvate</h2>
     <nav>
     <a href="dashboard.php">Dashboard</a>
-      <a href="jenis_sampah.php">Daftar Sampah</a>
-      <a href="beli_sampah.php">Pembelian Sampah</a>
-      <a href="jual_sampah.php">Penjualan Sampah</a>
-      <a href="redeem.php">Redeem</a>
-      <a href="logout.php">Logout</a>
+    <a href="jenis_sampah.php">Data Sampah</a>
+      <a href="daftar_nasabah.php">Data Nasabah</a>
+      <a href="beli_sampah.php">Beli Sampah</a>
+      <a href="jual_sampah.php">Jual Sampah</a>
+      <a href="redeem.php">Tarik Saldo</a>
+      <a href="logout.php">Keluar</a>
     </nav>
   </aside>
 

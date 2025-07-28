@@ -140,11 +140,12 @@ while ($row = mysqli_fetch_assoc($result)) {
     <h2>GreenOvate</h2>
     <nav>
       <a href="dashboard.php">Dashboard</a>
-      <a href="jenis_sampah.php">Daftar Sampah</a>
-      <a href="beli_sampah.php">Pembelian Sampah</a>
-      <a href="jual_sampah.php">Penjualan Sampah</a>
-      <a href="redeem.php">Redeem</a>
-      <a href="logout.php">Logout</a>
+      <a href="jenis_sampah.php">Data Sampah</a>
+      <a href="daftar_nasabah.php">Data Nasabah</a>
+      <a href="beli_sampah.php">Beli Sampah</a>
+      <a href="jual_sampah.php">Jual Sampah</a>
+      <a href="redeem.php">Tarik Saldo</a>
+      <a href="logout.php">Keluar</a>
     </nav>
   </aside>
 

@@ -42,7 +42,7 @@ if (isset($_SESSION['success'])) {
     }
     .sidebar nav a:hover { background-color: #1b7c4d; }
     .main { flex: 1; padding: 30px; background-color: #f0fdf4; }
-    h2 { margin-bottom: 20px; color: #166534; }
+    //h2 { margin-bottom: 20px; color: #166534; }
     a.btn-tambah {
       display: inline-block; padding: 10px 15px; background: #166534; color: white; text-decoration: none;
       border-radius: 5px; margin-bottom: 15px;
@@ -58,15 +58,16 @@ if (isset($_SESSION['success'])) {
   </style>
 </head>
 <body>
-  <aside class="sidebar">
+<aside class="sidebar">
     <h2>GreenOvate</h2>
     <nav>
       <a href="dashboard.php">Dashboard</a>
-      <a href="jenis_sampah.php">Daftar Sampah</a>
-      <a href="beli_sampah.php">Pembelian Sampah</a>
-      <a href="jual_sampah.php">Penjualan Sampah</a>
-      <a href="redeem.php">Redeem</a>
-      <a href="logout.php">Logout</a>
+      <a href="jenis_sampah.php">Data Sampah</a>
+      <a href="daftar_nasabah.php">Data Nasabah</a>
+      <a href="beli_sampah.php">Beli Sampah</a>
+      <a href="jual_sampah.php">Jual Sampah</a>
+      <a href="redeem.php">Tarik Saldo</a>
+      <a href="logout.php">Keluar</a>
     </nav>
   </aside>
 
